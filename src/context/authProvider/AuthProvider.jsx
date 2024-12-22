@@ -7,12 +7,16 @@ const AuthProvider = ({children}) => {
 
   const googleProvider = new GoogleAuthProvider();
 
-  const signInWithGoogle = (email, password) => {
-    return signInWithPopup(auth, email, password);
+  const signInWithGoogle = () => {
+    return signInWithPopup(auth, googleProvider);
+  }
+
+  const data = {
+    signInWithGoogle
   }
 
   return (
-    <AuthContext.Provider value={'kire'}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={data}>{children}</AuthContext.Provider>
   );
 };
 
