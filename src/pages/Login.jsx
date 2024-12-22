@@ -1,21 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 import Lottie from "lottie-react";
-import loginLottie from '../assets/lotties/login.json'
+import loginLottie from "../assets/lotties/login.json";
 import GoogleSignIn from "../components/GoogleSignIn";
 import { Link } from "react-router-dom";
 
-
 const Login = () => {
-  const handleSignIn = e => {
+  const handleSignIn = (e) => {
     e.preventDefault();
-    
+
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
     console.log(email, password);
-    
-  }
+  };
   return (
     <div className="min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -60,12 +58,11 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm">
+              <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm">
                 Login
               </button>
             </div>
 
-            
             <p className="text-xs">
               Don't Have an Account?{" "}
               <Link
