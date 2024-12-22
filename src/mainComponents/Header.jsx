@@ -30,7 +30,7 @@ const Header = () => {
     logout()
       .then(() => {
         navigate("/login");
-        toast('success', 'Logged Out Successfully')
+        toast("success", "Logged Out Successfully");
       })
       .catch((err) => {
         console.log(err.code);
@@ -54,7 +54,7 @@ const Header = () => {
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active1" : ""
           }
-          to="/movies"
+          to="/foods"
         >
           Avilable Foods
         </NavLink>
@@ -64,7 +64,7 @@ const Header = () => {
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active1" : ""
           }
-          to="/add_movies"
+          to="/add-foods"
         >
           Add Foods
         </NavLink>
@@ -74,9 +74,9 @@ const Header = () => {
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active1" : ""
           }
-          to="/favorites"
+          to="/manage-foods"
         >
-          Manage My Foods 
+          Manage My Foods
         </NavLink>
       </li>
       <li>
@@ -84,7 +84,7 @@ const Header = () => {
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active1" : ""
           }
-          to="/about"
+          to="/food-request"
         >
           Food Request
         </NavLink>
