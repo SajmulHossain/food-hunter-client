@@ -1,10 +1,11 @@
+import Header from "./mainComponents/Header"
 
 
 function App() {
 
   return (
     <>
-    Assignment 11
+    <Header />
         
     </>
   )
