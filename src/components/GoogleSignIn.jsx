@@ -5,15 +5,18 @@ import toast from '../utils/toast'
 
 const GoogleSignIn = () => {
   const {pathname} = useLocation();
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, setLoading, setUser } = useAuth();
 
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
-    .then(() => {
+    .then(({user}) => {
+      setUser(user);
+      setLoading(false);
       toast('success', `${pathname === 'login' ? 'Logged in Successfully' : 'Signed in Successfully'}`)
     })
     .catch(({code}) => {
-      toast('error', code)
+      toast('error', code);
+      setLoading(false);
     })
   }
 
