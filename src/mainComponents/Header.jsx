@@ -1,9 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "../utils/toast";
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const {state} = useLocation();
+  console.log(state);
   const handleLogOut = () => {
     logout()
       .then(() => {
@@ -114,6 +116,7 @@ const Header = () => {
             <>
               {" "}
               <NavLink
+              state={state}
                 to="/login"
                 className={({ isActive }) =>
                   `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${
@@ -124,6 +127,7 @@ const Header = () => {
                 Log in
               </NavLink>
               <NavLink
+                state={state}
                 to="/sign-up"
                 className={({ isActive }) =>
                   `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${

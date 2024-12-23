@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import signUpLottie from "../assets/lotties/signup.json";
 import GoogleSignIn from "../components/GoogleSignIn";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import toast from "../utils/toast";
@@ -10,6 +10,7 @@ const SignUp = () => {
   const { signUp, updateUserInfo, setUser } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const {state} = useLocation();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const SignUp = () => {
         setUser(user);
         updateUserInfo(userData)
           .then(() => {
-            navigate('/');
+            navigate(state ? state : '/');
             toast("success", "SignUp Successfull!");
           })
           .catch(({ code }) => {
@@ -132,6 +133,7 @@ const SignUp = () => {
             <p className="text-xs">
               Already Have an Account?{" "}
               <Link
+              state={state}
                 to="/login"
                 className="underline hover:italic font-semibold"
               >

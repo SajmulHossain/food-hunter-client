@@ -2,13 +2,14 @@
 import Lottie from "lottie-react";
 import loginLottie from "../assets/lotties/login.json";
 import GoogleSignIn from "../components/GoogleSignIn";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "../utils/toast";
 
 const Login = () => {
   const { login, setUser } = useAuth();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const handleSignIn = (e) => {
     e.preventDefault();
 
@@ -20,7 +21,7 @@ const Login = () => {
     .then(({user}) => {
       toast('success', 'Log in successful!')
       setUser(user);
-      navigate('/');
+      navigate(state || '/');
     })
     .catch(({code}) => {
       toast('error', code)
@@ -78,6 +79,7 @@ const Login = () => {
             <p className="text-xs">
               Don't Have an Account?{" "}
               <Link
+              state={state}
                 to="/sign-up"
                 className="underline hover:italic font-semibold"
               >
