@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import SecureAuth from "./SecureAuth";
 import PrivetRoute from "./PrivetRoute";
+import FoodDetails from "../pages/FoodDetails";
 
 const routes = createBrowserRouter([
   {
@@ -63,6 +64,12 @@ const routes = createBrowserRouter([
           </SecureAuth>
         ),
       },
+      {
+        path: '/foods/:id', 
+        element: <PrivetRoute>
+          <FoodDetails />
+        </PrivetRoute>
+      }
     ],
   },
 ]);

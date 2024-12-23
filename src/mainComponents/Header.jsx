@@ -5,7 +5,7 @@ import toast from "../utils/toast";
 const Header = () => {
   const { user, logout } = useAuth();
   const {state} = useLocation();
-  console.log(state);
+  
   const handleLogOut = () => {
     logout()
       .then(() => {
@@ -92,7 +92,7 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content rounded-box top-8 bg-green-100 z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content rounded-box top-8 bg-green-100 z-50 mt-3 w-52 p-2 shadow"
             >
               {links}
             </ul>

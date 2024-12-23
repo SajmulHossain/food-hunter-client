@@ -1,9 +1,28 @@
+import { useEffect, useState } from "react";
+import Heading from "../components/Heading";
+import Food from "../components/Food";
 
 
 const Foods = () => {
+  const [foods, setFoods] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/foods')
+    .then(res => res.json())
+    .then(data => {
+      setFoods(data)
+    })
+  },[])
+
   return (
     <section>
-      Food section
+      <Heading heading='Available Foods' paragraph='Request for food that you needed' />
+
+      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`}>
+        {
+          foods.map(food => <Food key={food._id} food={food} />)
+        }
+      </div>
     </section>
   );
 };
