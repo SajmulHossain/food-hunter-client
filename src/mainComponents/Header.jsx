@@ -1,6 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import toast from "../utils/toast";
 
 const Header = () => {
+  const { user, logout } = useAuth();
+  const handleLogOut = () => {
+    logout()
+      .then(() => {
+        toast("success", "Logout Successfull!");
+      })
+      .catch(({ code }) => {
+        toast("error", code);
+      });
+  };
   const links = (
     <>
       <li>
@@ -91,8 +103,38 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end join">
-          <NavLink to='/login' className={({isActive}) => `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${isActive ? 'active1' : ''}`}>Log in</NavLink>
-          <NavLink to='/sign-up' className={({isActive}) => `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${isActive ? 'active1' : ''}`}>Sign Up</NavLink>
+          {user ? (
+            <button
+              onClick={handleLogOut}
+              className="btn bg-green-400 hover:bg-transparent hover:text-black hover:scale-105"
+            >
+              Log Out
+            </button>
+          ) : (
+            <>
+              {" "}
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${
+                    isActive ? "active1" : ""
+                  }`
+                }
+              >
+                Log in
+              </NavLink>
+              <NavLink
+                to="/sign-up"
+                className={({ isActive }) =>
+                  `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${
+                    isActive ? "active1" : ""
+                  }`
+                }
+              >
+                Sign Up
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -2,9 +2,13 @@
 import Lottie from "lottie-react";
 import loginLottie from "../assets/lotties/login.json";
 import GoogleSignIn from "../components/GoogleSignIn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import toast from "../utils/toast";
 
 const Login = () => {
+  const { login, setUser } = useAuth();
+  const navigate = useNavigate();
   const handleSignIn = (e) => {
     e.preventDefault();
 
@@ -12,7 +16,15 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    login(email, password)
+    .then(({user}) => {
+      toast('success', 'Log in successful!')
+      setUser(user);
+      navigate('/');
+    })
+    .catch(({code}) => {
+      toast('error', code)
+    })
   };
   return (
     <div className="min-h-screen my-4">
