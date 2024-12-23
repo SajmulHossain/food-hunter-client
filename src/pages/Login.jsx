@@ -15,7 +15,7 @@ const Login = () => {
     console.log(email, password);
   };
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen my-4">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div data-aos="fade-right">
           <Lottie animationData={loginLottie} />

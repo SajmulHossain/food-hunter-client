@@ -1,12 +1,63 @@
 import Lottie from "lottie-react";
-import signUpLottie from '../assets/lotties/signup.json'
+import signUpLottie from "../assets/lotties/signup.json";
 import GoogleSignIn from "../components/GoogleSignIn";
 import { Link } from "react-router-dom";
-
+import useAuth from "../hooks/useAuth";
+import { useState } from "react";
+import toast from "../utils/toast";
 
 const SignUp = () => {
+  const { signUp, updateUserInfo, setUser } = useAuth();
+  const [error, setError] = useState("");
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    setError("");
+
+    const form = e.target;
+
+    const name = form.name.value;
+    const photo = e.target.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const regexUppercase = /[A-Z]/;
+    const regexLowercase = /[a-z]/;
+
+    if (password.length < 6) {
+      return setError("Password must contain atleast 6 characters.");
+    }
+
+    if (!regexUppercase.test(password)) {
+      return setError("Password must contain atleast one uppercase letter.");
+    }
+
+    if (!regexLowercase.test(password)) {
+      return setError("Password must contain atleast one lowercase letter.");
+    }
+
+    const userData = {
+      displayName: name,
+      photoURL: photo,
+    };
+
+    signUp(email, password)
+      .then(({ user }) => {
+        setUser(user);
+        updateUserInfo(userData)
+          .then(() => {
+            toast("success", "SignUp Successfull!");
+          })
+          .catch(({ code }) => {
+            toast("error", code);
+          });
+      })
+      .catch(({ code }) => {
+        toast("error", code);
+      });
+  };
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen my-4">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div data-aos="fade-right" className="w-2/5">
           <Lottie animationData={signUpLottie} />
@@ -15,18 +66,44 @@ const SignUp = () => {
           data-aos="flip-right"
           className="card w-full max-w-md shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
         >
-          <form className="card-body">
+          <form onSubmit={handleSignUp} className="card-body">
             <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
-              Login now!
+              SignUp now!
             </h3>
+            {error && <p className="text-red-500 text-center">{error}</p>}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Name"
+                className="input input-bordered rounded-sm"
+                name="name"
+                required
+              />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
-                placeholder="email"
+                placeholder="Email"
                 className="input input-bordered rounded-sm"
+                name="email"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Photo URL"
+                className="input input-bordered rounded-sm"
+                name="photo"
                 required
               />
             </div>
@@ -36,18 +113,17 @@ const SignUp = () => {
               </label>
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 className="input input-bordered rounded-sm"
+                name="password"
                 required
               />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm">
+              <button
+                type="submit"
+                className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm"
+              >
                 Login
               </button>
             </div>
@@ -61,7 +137,7 @@ const SignUp = () => {
               </Link>
             </p>
             <div className="divider">or</div>
-            <GoogleSignIn/>
+            <GoogleSignIn />
           </form>
         </div>
       </div>
