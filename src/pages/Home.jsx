@@ -1,8 +1,11 @@
+import HomeSlider from "../components/HomeSlider";
 
 const Home = () => {
   return (
     <section>
-      Home section
+      <div className="my-8">
+        <HomeSlider />
+      </div>
     </section>
   );
 };
