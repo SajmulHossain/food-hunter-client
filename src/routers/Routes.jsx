@@ -8,6 +8,7 @@ import FoodRequest from "../pages/FoodRequest";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import SecureAuth from "./SecureAuth";
+import PrivetRoute from "./PrivetRoute";
 
 const routes = createBrowserRouter([
   {
@@ -24,15 +25,27 @@ const routes = createBrowserRouter([
       },
       {
         path: "/add-foods",
-        element: <AddFoods />,
+        element: (
+          <PrivetRoute>
+            <AddFoods />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/manage-foods",
-        element: <ManageFoods />,
+        element: (
+          <PrivetRoute>
+            <ManageFoods />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/food-request",
-        element: <FoodRequest />,
+        element: (
+          <PrivetRoute>
+            <FoodRequest />
+          </PrivetRoute>
+        ),
       },
       {
         path: "login",
