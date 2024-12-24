@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import { compareAsc, format } from "date-fns";
 import { CiCalendarDate } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -37,7 +38,10 @@ const Food = ({food}) => {
         {location}
       </p>
 
-      <div className="flex items-center border border-green-800 p-3 rounded-lg gap-2 mt-4 relative">
+      <div
+        data-aos="fade-right"
+        className="flex items-center border border-green-800 p-3 rounded-lg gap-2 mt-4 relative"
+      >
         <div>
           <img
             className="h-12 w-12 rounded-full object-cover"
@@ -61,18 +65,24 @@ const Food = ({food}) => {
             className={`${
               status === "Available"
                 ? "bg-blue-200 text-blue-900 w-fit px-4 py-1 rounded-sm"
-                : ""
+                : "text-red-900 bg-red-200"
             }`}
           >
             {status}
           </p>
         </div>
         <div>
-          <p className="flex items-center gap-1 font-semibold text-blue-800">
+          <p
+            className={`${
+              compareAsc(new Date(), new Date(expiredDate)) === -1
+                ? "text-blue-800"
+                : "text-red-600"
+            } flex items-center gap-1 font-semibold text-blue-800`}
+          >
             <span>
               <CiCalendarDate size={24} />
             </span>{" "}
-            {expiredDate}
+            {format(new Date(expiredDate || new Date()), "PP")}
           </p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import Heading from "../components/Heading";
 import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import axios from "axios";
+import { compareAsc, format } from "date-fns";
 
 const FoodDetails = () => {
   const [food, setFood] = useState({});
@@ -22,7 +23,7 @@ const FoodDetails = () => {
   } = food;
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/foods/${id}`)
+    axios.get(`http://localhost:3000/food/${id}`)
     .then(({data}) => {
       setFood(data);
     })
@@ -32,9 +33,7 @@ const FoodDetails = () => {
     <section className="my-12">
       <Heading heading="Food Details" paragraph="Check all data to request" />
 
-      <div
-        className="border p-4 rounded border-green-800 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4 hover:scale-105 transition-all duration-500"
-      >
+      <div className="border p-4 rounded border-green-800 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4 hover:scale-105 transition-all duration-500">
         <div data-aos="fade-down">
           <img
             src={image}
@@ -82,20 +81,38 @@ const FoodDetails = () => {
           <div className="flex flex-col gap-4 sm:gap-0 sm:flex-row sm:justify-between sm:items-center mx-auto mt-6">
             <p>
               <span className="font-semibold">Availability:</span>{" "}
-              <span className="bg-green-300 px-4 py-[2px] rounded text-green-700">
+              <span
+                className={`${
+                  status === 'Available'
+                    ? "text-green-800 bg-green-300"
+                    : "text-red-800 bg-red-200"
+                } px-4 py-1 rounded`}
+              >
                 {status}
               </span>
             </p>
             <p>
               <span className="font-semibold">Quantity:</span>{" "}
-              <span className="bg-green-300 px-4 py-1 rounded text-green-700">
+              <span
+                className={`${
+                  quantity >= 5
+                    ? "text-green-800 bg-green-300"
+                    : "text-red-800 bg-red-200"
+                } px-4 py-1 rounded`}
+              >
                 {quantity}
               </span>
             </p>
             <p>
               <span className="font-semibold">Exp. Date:</span>{" "}
-              <span className="bg-green-300 px-4 py-1 rounded text-green-700">
-                {expiredDate}
+              <span
+                className={`${
+                  compareAsc(new Date(), new Date(expiredDate)) === -1
+                    ? "bg-green-300 text-green-800"
+                    : "text-red-800 bg-red-200"
+                } px-4 py-1 rounded`}
+              >
+                {format(new Date(expiredDate || new Date()), "PP")}
               </span>
             </p>
           </div>

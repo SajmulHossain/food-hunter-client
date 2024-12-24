@@ -1,10 +1,15 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import modal from "../utils/modal";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { compareAsc } from "date-fns";
+import axios from "axios";
 
 const AddFoods = () => {
   const { user } = useAuth();
   const [error, setError] = useState("");
+  const [expiredDate, setExpiredDate] = useState(new Date());
 
   const handleAddFood = (e) => {
     e.preventDefault();
@@ -16,7 +21,6 @@ const AddFoods = () => {
     const image = form.image.value;
     const location = form.location.value;
     const quantity = parseInt(form.quantity.value);
-    const expiredDate = form.expiredDate.value;
     const status = form.status.value;
     const notes = form.notes.value;
 
@@ -24,9 +28,25 @@ const AddFoods = () => {
     const donatorEmail = form.donatorEmail.value;
     const donatorPhoto = form.donatorPhoto.value;
 
-
     if (isNaN(quantity)) {
+      form.quantity.classList.add("border-red-600", "focus:border-red-600");
       return setError("Please give a valid quantity");
+    } else {
+      form.quantity.classList.remove("border-red-600", "focus:border-red-600");
+    }
+
+    if (quantity === 0) {
+      form.quantity.classList.add("border-red-600", "focus:border-red-600");
+      return setError("You must give the quantity atleast 1");
+    } else {
+      form.quantity.classList.remove("border-red-600", "focus:border-red-600");
+    }
+
+    if (compareAsc(new Date(), new Date(expiredDate)) === 1) {
+      form.date.classList.add("border-red-600", "focus:border-red-600");
+      return setError(`You can't add an expired food`);
+    } else {
+      form.date.classList.remove("border-red-600", "focus:border-red-600");
     }
 
     const data = {
@@ -42,21 +62,13 @@ const AddFoods = () => {
       donatorPhoto,
     };
 
-    fetch("http://localhost:3000/foods", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then(({ insertedId }) => {
-        if(insertedId) {
-          modal('Food Donate!', 'Food added successfully', 'success');
-        } else {
-          modal('Food Donate!', 'Something went wrong!', 'error');
-        }
-      });
+    axios.post("http://localhost:3000/foods", data).then(({ data }) => {
+      if (data.insertedId) {
+        modal("Food Donate!", "Food added successfully", "success");
+      } else {
+        modal("Food Donate!", "Something went wrong!", "error");
+      }
+    });
   };
   return (
     <section className="min-h-screen my-4">
@@ -69,7 +81,7 @@ const AddFoods = () => {
             <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
               Add Food!
             </h3>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className="text-red-600 text-center">{error}</p>}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Food Name</span>
@@ -95,7 +107,7 @@ const AddFoods = () => {
               />
             </div>
 
-            <div className="flex justify-between gap-2">
+            <div className="flex justify-between gap-1">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Pickup Location</span>
@@ -127,12 +139,12 @@ const AddFoods = () => {
                 <label className="label">
                   <span className="label-text">Expired Date</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Expired Date"
+                <DatePicker
+                  name="date"
                   className="input input-bordered rounded-sm w-full"
-                  name="expiredDate"
-                  required
+                  dateFormat="PP"
+                  selected={expiredDate}
+                  onChange={(value) => setExpiredDate(value)}
                 />
               </div>
               <div className="form-control">
@@ -144,6 +156,8 @@ const AddFoods = () => {
                   placeholder="Food Status"
                   className="input input-bordered rounded-sm w-full"
                   name="status"
+                  value="Available"
+                  readOnly
                   required
                 />
               </div>
@@ -165,9 +179,6 @@ const AddFoods = () => {
 
             <div className="flex justify-between gap-1">
               <div className="form-control">
-                {/* <label className="label">
-                  <span className="label-text">Donator Name</span>
-                </label> */}
                 <input
                   type="text"
                   placeholder="Donator Name"
@@ -179,9 +190,6 @@ const AddFoods = () => {
                 />
               </div>
               <div className="form-control">
-                {/* <label className="label">
-                  <span className="label-text">Donator Email</span>
-                </label> */}
                 <input
                   type="text"
                   placeholder="Donator Email"
@@ -195,9 +203,6 @@ const AddFoods = () => {
             </div>
 
             <div className="form-control">
-              {/* <label className="label">
-                  <span className="label-text">Donator Email</span>
-                </label> */}
               <input
                 type="text"
                 placeholder="Donator Image"

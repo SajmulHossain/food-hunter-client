@@ -24,7 +24,7 @@ const HomeSlider = () => {
       loop
       navigation={true}
       modules={[Autoplay, Navigation]}
-      className="mySwiper rounded-lg"
+      className="mySwiper rounded"
     >
       <SwiperSlide>
         <img
