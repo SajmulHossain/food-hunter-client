@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import axios from "axios";
 import { compareAsc, format } from "date-fns";
+import RequestFoodModal from "../components/RequestFoodModal";
 
 const FoodDetails = () => {
   const [food, setFood] = useState({});
@@ -120,10 +121,12 @@ const FoodDetails = () => {
           <p className="mt-6 text-gray-600">{notes}</p>
 
           <div className="mt-4">
-            <button className="btn w-full btn-primary">Request Food</button>
+            <button onClick={() => document.getElementById('my_modal').showModal()} className="btn w-full btn-primary">Request Food</button>
           </div>
         </div>
       </div>
+
+      <RequestFoodModal food={food} />
     </section>
   );
 };
