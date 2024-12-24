@@ -191,10 +191,20 @@ const RequestFoodModal = ({ food }) => {
                   </div>
                 </div>
               </fieldset>
+
+              <div>
+                <textarea
+                  type="text"
+                  className="input input-bordered rounded-sm py-2 bg-green-50 w-full h-32"
+                  defaultValue={food?.notes}
+                />
+              </div>
             </div>
 
             <div className="mt-6">
-              <button className="btn w-full hover:bg-green-700 bg-green-600 rounded text-white">Request</button>
+              <button className="btn w-full hover:bg-green-700 bg-green-600 rounded text-white">
+                Request
+              </button>
             </div>
           </form>
         </div>
