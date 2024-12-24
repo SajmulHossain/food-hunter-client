@@ -81,7 +81,7 @@ const ManageFoods = () => {
                         : "text-red-700 bg-red-100"
                     } px-3 py-1 rounded`}
                   >
-                    {food.quantity}
+                    {food.quantity < 10 ? '0'+ food.quantity : food.quantity}
                   </span>
                 </td>
                 <td>
