@@ -10,6 +10,7 @@ import SignUp from "../pages/SignUp";
 import SecureAuth from "./SecureAuth";
 import PrivetRoute from "./PrivetRoute";
 import FoodDetails from "../pages/FoodDetails";
+import UpdateFood from "../pages/UpdateFood";
 
 const routes = createBrowserRouter([
   {
@@ -68,6 +69,12 @@ const routes = createBrowserRouter([
         path: '/foods/:id', 
         element: <PrivetRoute>
           <FoodDetails />
+        </PrivetRoute>
+      },
+      {
+        path: '/food/update/:id',
+        element: <PrivetRoute>
+          <UpdateFood />
         </PrivetRoute>
       }
     ],
