@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
+import axios from "axios";
 
 const FoodDetails = () => {
   const [food, setFood] = useState({});
@@ -21,23 +22,23 @@ const FoodDetails = () => {
   } = food;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/foods/${id}`)
-      .then((res) => res.json())
-      .then((data) => setFood(data));
+    axios.get(`http://localhost:3000/foods/${id}`)
+    .then(({data}) => {
+      setFood(data);
+    })
   }, [id]);
 
   return (
-    <section>
+    <section className="my-12">
       <Heading heading="Food Details" paragraph="Check all data to request" />
 
       <div
-        data-aos="fade-up"
-        className="border p-4 rounded border-green-800 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4"
+        className="border p-4 rounded border-green-800 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4 hover:scale-105 transition-all duration-500"
       >
         <div data-aos="fade-down">
           <img
             src={image}
-            className="w-full rounded h-[400px] object-cover"
+            className="w-full rounded h-[400px] object-cover "
             alt={`${foodName}'s image`}
           />
         </div>
@@ -86,22 +87,24 @@ const FoodDetails = () => {
               </span>
             </p>
             <p>
-            <span className="font-semibold">Quantity:</span>{" "}
+              <span className="font-semibold">Quantity:</span>{" "}
               <span className="bg-green-300 px-4 py-1 rounded text-green-700">
                 {quantity}
               </span>
             </p>
             <p>
-            <span className="font-semibold">Exp. Date:</span>{" "}
+              <span className="font-semibold">Exp. Date:</span>{" "}
               <span className="bg-green-300 px-4 py-1 rounded text-green-700">
                 {expiredDate}
               </span>
             </p>
           </div>
 
-          <p className="mt-6 text-gray-600">
-            {notes}
-          </p>
+          <p className="mt-6 text-gray-600">{notes}</p>
+
+          <div className="mt-4">
+            <button className="btn w-full btn-primary">Request Food</button>
+          </div>
         </div>
       </div>
     </section>

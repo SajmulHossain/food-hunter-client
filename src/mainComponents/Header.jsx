@@ -3,13 +3,14 @@ import useAuth from "../hooks/useAuth";
 import toast from "../utils/toast";
 
 const Header = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, setLoading } = useAuth();
   const {state} = useLocation();
   
   const handleLogOut = () => {
     logout()
       .then(() => {
         toast("success", "Logout Successfull!");
+        setLoading(false);
       })
       .catch(({ code }) => {
         toast("error", code);

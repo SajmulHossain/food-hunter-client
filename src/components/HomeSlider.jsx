@@ -1,8 +1,7 @@
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import slider1 from '../assets/slider1.jpg'
@@ -22,11 +21,9 @@ const HomeSlider = () => {
         delay: 2500,
         disableOnInteraction: false,
       }}
-      pagination={{
-        clickable: true,
-      }}
+      loop
       navigation={true}
-      modules={[Autoplay, Pagination, Navigation]}
+      modules={[Autoplay, Navigation]}
       className="mySwiper rounded-lg"
     >
       <SwiperSlide>
