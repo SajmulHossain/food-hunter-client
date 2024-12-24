@@ -22,7 +22,7 @@ const UpdateFood = () => {
 
   useEffect(() =>{
     if(food?.expiredDate) {
-      setExpiredDate(new Date(food?.expiredDate));
+      setExpiredDate(new Date(food?.expiredDate)); 
     }
   },[food])
 
