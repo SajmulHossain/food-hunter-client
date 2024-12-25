@@ -1,14 +1,26 @@
-import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import axios from "axios";
 import { compareAsc, format } from "date-fns";
 import RequestFoodModal from "../components/RequestFoodModal";
+import { useQuery } from "@tanstack/react-query";
+import DataLoding from "../components/DataLoding";
 
 const FoodDetails = () => {
-  const [food, setFood] = useState({});
   const { id } = useParams();
+
+  const { data: food, isLoading } = useQuery({
+    queryKey: [`food-${id}`],
+    queryFn: async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/food/${id}`);
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <DataLoding />;
+  }
 
   const {
     foodName,
@@ -23,12 +35,6 @@ const FoodDetails = () => {
     donatorPhoto,
   } = food;
 
-  useEffect(() => {
-    axios.get(`http://localhost:3000/food/${id}`)
-    .then(({data}) => {
-      setFood(data);
-    })
-  }, [id]);
 
   return (
     <section className="my-12">
