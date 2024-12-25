@@ -1,6 +1,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "../utils/toast";
+import logo from '../assets/logo.png'
 
 const Header = () => {
   const { user, logout, setLoading } = useAuth();
@@ -99,7 +100,8 @@ const Header = () => {
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost text-xl hover:bg-inherit">
-            daisyUI
+            <img src={logo} className="h-10 w-10 rounded-full" alt="logo png" />
+          <span className="italic">Food Hunter</span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
