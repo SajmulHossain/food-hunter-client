@@ -4,10 +4,41 @@ import { format } from "date-fns";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import modal from "../utils/modal";
+import { useNavigate } from "react-router-dom";
 
 const RequestFoodModal = ({ food }) => {
   const [requestDate, setRequestDate] = useState(new Date());
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate()
+
+  const handleRequest = e => {
+    e.preventDefault();
+
+    const form = e.target;
+    const userEmail = form.userEmail.value;
+    const newNotes = form.newNotes.value;
+    
+    const data = {
+      userEmail,
+      requestDate,
+      foodId: food?._id,
+      newNotes
+    }
+
+    axiosSecure.post(`/food/${food?._id}`, data)
+    .then(res=> {
+      if(res?.data?.result?.modifiedCount) {
+        modal('Request Food!', 'Food Request Accepted.', 'success')
+        navigate('/food-request')
+      } else {
+        modal('Food Request!', 'Something went wrong.', 'error')
+        document.getElementById('my_modal').close();
+      }
+    })
+  }
   return (
     <dialog id="my_modal" className="modal backdrop-blur-md">
       <div className="w-full px-4 mx-auto">
@@ -18,7 +49,7 @@ const RequestFoodModal = ({ food }) => {
             </button>
           </form>
 
-          <form>
+          <form onSubmit={handleRequest}>
             <h3 className="font-bold text-xl lg:text-2xl text-center mb-6">
               Request Food
             </h3>
@@ -200,6 +231,7 @@ const RequestFoodModal = ({ food }) => {
                   type="text"
                   className="input input-bordered rounded-sm py-2 bg-green-50 w-full h-32"
                   defaultValue={food?.notes}
+                  name="newNotes"
                 />
               </div>
             </div>

@@ -66,7 +66,7 @@ const UpdateFood = () => {
           donatorPhoto,
         };
 
-        axios.put(`https://ph-assignment-11-server-phi.vercel.app/food/update/${id}`, data)
+        axios.put(`http://localhost:3000/food/update/${id}`, data)
         .then(({data}) => {
           if(data.modifiedCount) {
             modal('Food Update!', 'Food Updated Succesfully', 'success');
@@ -80,7 +80,7 @@ const UpdateFood = () => {
   }
 
   useEffect(() =>{
-    axios.get(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`).then(({ data }) => {
+    axios.get(`http://localhost:3000/food/${id}`).then(({ data }) => {
       setFood(data);
     });
   }, [id])
@@ -94,12 +94,12 @@ const UpdateFood = () => {
 
   return (
     <section className="min-h-screen my-4">
-          <div className="hero-content flex-col">
+          <div className="hero-content px-0 flex-col">
             <div
               data-aos="flip-left"
               className="card w-full max-w-lg shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
             >
-              <form onSubmit={handleUpdateFood} className="card-body">
+              <form onSubmit={handleUpdateFood} className="card-body px-4 lg:px-6">
                 <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
                   Update Food!
                 </h3>

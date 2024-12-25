@@ -64,9 +64,9 @@ const Food = ({food}) => {
           <p
             className={`${
               status === "Available"
-                ? "bg-blue-200 text-blue-900 w-fit px-4 py-1 rounded-sm"
+                ? "bg-blue-200 text-blue-900"
                 : "text-red-900 bg-red-200"
-            }`}
+            } w-fit px-4 py-1 rounded-sm`}
           >
             {status}
           </p>

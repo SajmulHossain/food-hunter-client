@@ -90,7 +90,7 @@ const FoodDetails = () => {
               <span className="font-semibold">Availability:</span>{" "}
               <span
                 className={`${
-                  status === 'Available'
+                  status === "Available"
                     ? "text-green-800 bg-green-300"
                     : "text-red-800 bg-red-200"
                 } px-4 py-1 rounded`}
@@ -127,7 +127,13 @@ const FoodDetails = () => {
           <p className="mt-6 text-gray-600">{notes}</p>
 
           <div className="mt-4">
-            <button onClick={() => document.getElementById('my_modal').showModal()} className="btn w-full btn-primary">Request Food</button>
+            <button
+              disabled={status !== "Available"}
+              onClick={() => document.getElementById("my_modal").showModal()}
+              className={`btn w-full rounded btn-primary`}
+            >
+              Request Food
+            </button>
           </div>
         </div>
       </div>

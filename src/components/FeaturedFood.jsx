@@ -9,7 +9,7 @@ const FeaturedFood = () => {
 
   useEffect(() => {
     axios
-      .get("https://ph-assignment-11-server-phi.vercel.app/featuredFood?size=6")
+      .get("http://localhost:3000/featuredFood?size=6")
       .then(({ data }) => setFoods(data));
   }, []);
   return (

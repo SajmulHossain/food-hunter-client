@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setLoading(true);
-    axios.get("https://ph-assignment-11-server-phi.vercel.app/logout", { withCredentials: true });
+    axios.get("http://localhost:3000/logout", { withCredentials: true });
     return signOut(auth);
   };
 
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         setUser(currentUser);
         axios.post(
-          "https://ph-assignment-11-server-phi.vercel.app/jwt",
+          "http://localhost:3000/jwt",
           { email: currentUser?.email },
           { withCredentials: true }
         );
