@@ -22,27 +22,35 @@ const FoodRequest = () => {
 
   return (
     <section>
-      <Heading heading={`Food Request (${data?.length || 0})`} />
+      <Heading
+        heading={`Food Request (${data?.length || 0})`}
+        paragraph="Your Requested Foods Here"
+      />
 
       {(!data || data.length === 0) && <NoData />}
 
-      <div className="overflow-x-auto">
-        <table className="table table-lg border">
-          {/* head */}
-          <thead className="bg-violet-300">
-            <tr className="text-center">
-              <th></th>
-              <th>Food Name</th>
-              <th>Donor Name</th>
-              <td>PickUp Location</td>
-              <th>Expired Date</th>
-              <th>Request Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data &&
-              data?.map((food, index) => (
-                <tr key={food._id} className="text-center">
+      {data.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="table table-lg border">
+            {/* head */}
+            <thead className="bg-violet-300">
+              <tr className="text-center">
+                <th></th>
+                <th>Food Name</th>
+                <th>Donor Name</th>
+                <td>PickUp Location</td>
+                <th>Expired Date</th>
+                <th>Request Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.map((food, index) => (
+                <tr
+                  className={`${
+                    index % 2 === 0 ? "bg-gray-300" : "bg-gray-400"
+                  } text-center`}
+                  key={food._id}
+                >
                   <th>{index + 1}</th>
                   <td>{food.foodName}</td>
                   <td>{food.donatorName}</td>
@@ -68,9 +76,10 @@ const FoodRequest = () => {
                   </td>
                 </tr>
               ))}
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+      )}
     </section>
   );
 };

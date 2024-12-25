@@ -62,7 +62,7 @@ const AddFoods = () => {
       donatorPhoto,
     };
 
-    axios.post("http://localhost:3000/foods", data).then(({ data }) => {
+    axios.post("https://ph-assignment-11-server-phi.vercel.app/foods", data).then(({ data }) => {
       if (data.insertedId) {
         modal("Food Donate!", "Food added successfully", "success");
       } else {

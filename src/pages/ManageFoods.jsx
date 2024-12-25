@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
@@ -9,11 +8,13 @@ import Swal from "sweetalert2";
 import modal from "../utils/modal";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import DataLoding from "../components/DataLoding";
+import NoData from "../components/NoData";
 
 const ManageFoods = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [foods, setFoods] = useState([]);
 
   const handleDeleteFood = (id) => {
     Swal.fire({
@@ -26,7 +27,7 @@ const ManageFoods = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/food/${id}`).then(({ data }) => {
+        axios.delete(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`).then(({ data }) => {
           if (data.deletedCount) {
             modal("Deleted!", "Your food has been deleted.", "success");
           } else {
@@ -37,83 +38,92 @@ const ManageFoods = () => {
     });
   };
 
-  useEffect(() => {
-    axiosSecure
-      .get(`/foods/${user?.email}`)
-      .then((res) => {
-        setFoods(res?.data);
-      });
-  }, [user?.email, axiosSecure]);
+  const {data:foods, isLoading} = useQuery({queryKey: [`addedFoodOf-${user?.email}`], queryFn: async () => {
+    const { data } = await axiosSecure.get(`/foods/${user?.email}`);
+    return data;
+  }})
+
+  if(isLoading) {
+    return <DataLoding />
+  }
+
   return (
     <section className="my-12">
-      <Heading heading={`Your added Foods (${foods.length})`} />
+      <Heading heading={`Your added Foods (${foods?.length || 0})`} />
 
-      <div className="overflow-x-auto">
-        <table className="table table-lg border">
-          {/* head */}
-          <thead className="bg-violet-300">
-            <tr className="text-center">
-              <th></th>
-              <th>Food Name</th>
-              <th>Status</th>
-              <th>Quantity</th>
-              <th>Expired Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {foods?.map((food, index) => (
-              <tr key={food._id} className="text-center">
-                <th>{index + 1}</th>
-                <td>{food.foodName}</td>
-                <td className="px-3">
-                  <span
-                    className={`${
-                      food?.status === "Available"
-                        ? "bg-green-100 text-green-700"
-                        : "text-red-700 bg-red-100"
-                    } px-3 py-1 rounded`}
-                  >
-                    {food.status}
-                  </span>
-                </td>
-                <td className="px-3">
-                  <span
-                    className={`${
-                      food?.quantity >= 5
-                        ? "bg-green-100 text-green-700"
-                        : "text-red-700 bg-red-100"
-                    } px-3 py-1 rounded`}
-                  >
-                    {food.quantity < 10 ? '0'+ food.quantity : food.quantity}
-                  </span>
-                </td>
-                <td>
-                  <span
-                    className={`${
-                      compareAsc(new Date(), new Date(food.expiredDate)) === -1
-                        ? "bg-green-100 text-green-700"
-                        : "text-red-700 bg-red-100"
-                    } px-4 py-1 rounded inline-block`}
-                  >
-                    {food?.expiredDate
-                      ? format(new Date(food.expiredDate), "PP")
-                      : new Date()}
-                  </span>
-                </td>
-                <td className="flex items-center gap-2 justify-center">
-                  <Link to={`/food/update/${food._id}`}>
-                    <FaEdit size={22} color="green" />
-                  </Link>
-                  <button onClick={() => handleDeleteFood(food._id)}>
-                    <MdDelete size={22} color="red" />
-                  </button>
-                </td>
+      {(!foods || foods.length === 0) && <NoData />}
+
+      {foods.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="table table-lg border">
+            {/* head */}
+            <thead className="bg-violet-300">
+              <tr className="text-center">
+                <th></th>
+                <th>Food Name</th>
+                <th>Status</th>
+                <th>Quantity</th>
+                <th>Expired Date</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {foods?.map((food, index) => (
+                <tr key={food._id} className="text-center">
+                  <th>{index + 1}</th>
+                  <td>{food.foodName}</td>
+                  <td className="px-3">
+                    <span
+                      className={`${
+                        food?.status === "Available"
+                          ? "bg-green-100 text-green-700"
+                          : "text-red-700 bg-red-100"
+                      } px-3 py-1 rounded`}
+                    >
+                      {food.status}
+                    </span>
+                  </td>
+                  <td className="px-3">
+                    <span
+                      className={`${
+                        food?.quantity >= 5
+                          ? "bg-green-100 text-green-700"
+                          : "text-red-700 bg-red-100"
+                      } px-3 py-1 rounded`}
+                    >
+                      {food.quantity < 10 ? "0" + food.quantity : food.quantity}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      className={`${
+                        compareAsc(new Date(), new Date(food.expiredDate)) ===
+                        -1
+                          ? "bg-green-100 text-green-700"
+                          : "text-red-700 bg-red-100"
+                      } px-4 py-1 rounded inline-block`}
+                    >
+                      {food?.expiredDate
+                        ? format(new Date(food.expiredDate), "PP")
+                        : new Date()}
+                    </span>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2 justify-center">
+                      <Link to={`/food/update/${food._id}`}>
+                        <FaEdit size={22} color="green" />
+                      </Link>
+                      <button onClick={() => handleDeleteFood(food._id)}>
+                        <MdDelete size={22} color="red" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </section>
   );
 };
