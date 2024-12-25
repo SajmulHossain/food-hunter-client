@@ -43,7 +43,7 @@ const ManageFoods = () => {
       .then((res) => {
         setFoods(res?.data);
       });
-  }, [user?.email]);
+  }, [user?.email, axiosSecure]);
   return (
     <section className="my-12">
       <Heading heading={`Your added Foods (${foods.length})`} />
