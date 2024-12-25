@@ -90,7 +90,7 @@ const RequestFoodModal = ({ food }) => {
                       className="input input-bordered rounded-sm bg-green-50 focus:z-50"
                       name="expiredDate"
                       required
-                      defaultValue={format(new Date(food?.expiredDate), "PP")}
+                      defaultValue={format(new Date(food?.expiredDate || new Date()), "PP")}
                       readOnly
                     />
                   </div>

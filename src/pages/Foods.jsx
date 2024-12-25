@@ -12,6 +12,7 @@ const Foods = () => {
     .then(({data}) => {
       setFoods(data);
     })
+
     
   },[])
 
