@@ -11,11 +11,13 @@ import SecureAuth from "./SecureAuth";
 import PrivetRoute from "./PrivetRoute";
 import FoodDetails from "../pages/FoodDetails";
 import UpdateFood from "../pages/UpdateFood";
+import ErrorPage from "../pages/ErrorPage";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

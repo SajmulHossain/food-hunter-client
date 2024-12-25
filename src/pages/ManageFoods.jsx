@@ -53,7 +53,7 @@ const ManageFoods = () => {
               <th>Food Name</th>
               <th>Status</th>
               <th>Quantity</th>
-              <th className="w-full md:w-auto">Expired Date</th>
+              <th>Expired Date</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -90,7 +90,7 @@ const ManageFoods = () => {
                       compareAsc(new Date(), new Date(food.expiredDate)) === -1
                         ? "bg-green-100 text-green-700"
                         : "text-red-700 bg-red-100"
-                    } px-4 py-1 rounded w-full`}
+                    } px-4 py-1 rounded inline-block`}
                   >
                     {food?.expiredDate
                       ? format(new Date(food.expiredDate), "PP")
