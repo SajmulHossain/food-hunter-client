@@ -24,7 +24,7 @@ const FoodDetails = () => {
   } = food;
 
   useEffect(() => {
-    axios.get(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`)
+    axios.get(`http://localhost:3000/food/${id}`)
     .then(({data}) => {
       setFood(data);
     })

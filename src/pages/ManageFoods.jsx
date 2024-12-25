@@ -8,8 +8,10 @@ import { compareAsc, format } from "date-fns";
 import Swal from "sweetalert2";
 import modal from "../utils/modal";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageFoods = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [foods, setFoods] = useState([]);
 
@@ -24,7 +26,7 @@ const ManageFoods = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`).then(({ data }) => {
+        axios.delete(`http://localhost:3000/food/${id}`).then(({ data }) => {
           if (data.deletedCount) {
             modal("Deleted!", "Your food has been deleted.", "success");
           } else {
@@ -36,9 +38,11 @@ const ManageFoods = () => {
   };
 
   useEffect(() => {
-    axios.get(`https://ph-assignment-11-server-phi.vercel.app/foods/${user?.email}`).then(({ data }) => {
-      setFoods(data);
-    });
+    axiosSecure
+      .get(`foods/${user?.email}`)
+      .then((res) => {
+        setFoods(res?.data);
+      });
   }, [user?.email]);
   return (
     <section className="my-12">
