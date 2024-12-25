@@ -29,7 +29,7 @@ const Login = () => {
   };
   return (
     <div className="min-h-screen my-4">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content px-0 flex-col lg:flex-row-reverse">
         <div data-aos="fade-right">
           <Lottie animationData={loginLottie} />
         </div>
@@ -37,7 +37,7 @@ const Login = () => {
           data-aos="flip-left"
           className="card w-full max-w-md shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
         >
-          <form onSubmit={handleSignIn} className="card-body">
+          <form onSubmit={handleSignIn} className="card-body px-4 lg:px-6">
             <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
               Login now!
             </h3>

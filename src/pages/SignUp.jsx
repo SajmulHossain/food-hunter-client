@@ -61,15 +61,15 @@ const SignUp = () => {
   };
   return (
     <div className="min-h-screen my-4">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div data-aos="fade-right" className="w-2/5">
+      <div className="hero-content px-0 flex-col lg:flex-row-reverse">
+        <div data-aos="fade-right" className="lg:w-2/5">
           <Lottie animationData={signUpLottie} />
         </div>
         <div
           data-aos="flip-right"
           className="card w-full max-w-md shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
         >
-          <form onSubmit={handleSignUp} className="card-body">
+          <form onSubmit={handleSignUp} className="card-body px-4 lg:px-6">
             <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
               SignUp now!
             </h3>

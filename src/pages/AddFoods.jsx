@@ -72,12 +72,12 @@ const AddFoods = () => {
   };
   return (
     <section className="min-h-screen my-4">
-      <div className="hero-content flex-col">
+      <div className="hero-content px-0 flex-col">
         <div
           data-aos="flip-left"
           className="card w-full max-w-lg shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
         >
-          <form onSubmit={handleAddFood} className="card-body">
+          <form onSubmit={handleAddFood} className="card-body px-4 lg:px-6">
             <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
               Add Food!
             </h3>

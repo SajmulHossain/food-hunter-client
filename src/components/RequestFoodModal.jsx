@@ -10,8 +10,8 @@ const RequestFoodModal = ({ food }) => {
   const { user } = useAuth();
   return (
     <dialog id="my_modal" className="modal backdrop-blur-md">
-      <div className="w-[calc(100% - 16px)] mx-auto">
-        <div className="modal-box px-4 md:px-6 w-full max-w-screen-lg mx-auto bg-violet-100">
+      <div className="w-full px-4 mx-auto">
+        <div className="modal-box hide-scroll px-4 md:px-6 w-full max-w-screen-lg mx-auto bg-violet-100">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
@@ -90,7 +90,10 @@ const RequestFoodModal = ({ food }) => {
                       className="input input-bordered rounded-sm bg-green-50 focus:z-50"
                       name="expiredDate"
                       required
-                      defaultValue={format(new Date(food?.expiredDate || new Date()), "PP")}
+                      defaultValue={format(
+                        new Date(food?.expiredDate || new Date()),
+                        "PP"
+                      )}
                       readOnly
                     />
                   </div>
