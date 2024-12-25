@@ -1,4 +1,4 @@
-import { Link, replace, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import errorImg from '../assets/error.png'
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 
