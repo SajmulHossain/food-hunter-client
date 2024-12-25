@@ -8,7 +8,7 @@ const Foods = () => {
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/foods")
+    axios.get("https://ph-assignment-11-server-phi.vercel.app/foods")
     .then(({data}) => {
       setFoods(data);
     })

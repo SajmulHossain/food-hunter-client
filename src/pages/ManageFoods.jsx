@@ -24,7 +24,7 @@ const ManageFoods = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/food/${id}`).then(({ data }) => {
+        axios.delete(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`).then(({ data }) => {
           if (data.deletedCount) {
             modal("Deleted!", "Your food has been deleted.", "success");
           } else {
@@ -36,7 +36,7 @@ const ManageFoods = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/foods/${user?.email}`).then(({ data }) => {
+    axios.get(`https://ph-assignment-11-server-phi.vercel.app/foods/${user?.email}`).then(({ data }) => {
       setFoods(data);
     });
   }, [user?.email]);

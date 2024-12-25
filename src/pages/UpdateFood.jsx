@@ -66,7 +66,7 @@ const UpdateFood = () => {
           donatorPhoto,
         };
 
-        axios.put(`http://localhost:3000/food/update/${id}`, data)
+        axios.put(`https://ph-assignment-11-server-phi.vercel.app/food/update/${id}`, data)
         .then(({data}) => {
           if(data.modifiedCount) {
             modal('Food Update!', 'Food Updated Succesfully', 'success');
@@ -80,7 +80,7 @@ const UpdateFood = () => {
   }
 
   useEffect(() =>{
-    axios.get(`http://localhost:3000/food/${id}`).then(({ data }) => {
+    axios.get(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`).then(({ data }) => {
       setFood(data);
     });
   }, [id])
