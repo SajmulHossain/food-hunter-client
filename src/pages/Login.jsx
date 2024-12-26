@@ -7,9 +7,9 @@ import useAuth from "../hooks/useAuth";
 import toast from "../utils/toast";
 
 const Login = () => {
-  const { login, setUser } = useAuth();
+  const { login, setUser, setLoading } = useAuth();
   const navigate = useNavigate();
-  const { state } = useLocation();
+  const {state} = useLocation();
   const handleSignIn = (e) => {
     e.preventDefault();
 
@@ -18,14 +18,15 @@ const Login = () => {
     const password = form.password.value;
 
     login(email, password)
-    .then(({user}) => {
-      toast('success', 'Log in successful!')
-      setUser(user);
-      navigate(state || '/');
-    })
-    .catch(({code}) => {
-      toast('error', code)
-    })
+      .then(({ user }) => {
+        navigate(state);
+        toast("success", "Log in successful!");
+        setUser(user);
+      })
+      .catch(({ code }) => {
+        toast("error", code);
+        setLoading(false);
+      });
   };
   return (
     <div className="min-h-screen my-4">
@@ -71,7 +72,10 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm">
+              <button
+                type="submit"
+                className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm"
+              >
                 Login
               </button>
             </div>
@@ -79,7 +83,7 @@ const Login = () => {
             <p className="text-xs">
               Don't Have an Account?{" "}
               <Link
-              state={state}
+                state={state}
                 to="/sign-up"
                 className="underline hover:italic font-semibold"
               >

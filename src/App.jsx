@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="max-w-screen-xl mx-auto px-4">
+      <main className="max-w-screen-xl mx-auto px-4 min-h-[calc(100vh-100px)]">
         <Outlet />
       </main>
       <Footer />

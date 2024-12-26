@@ -1,16 +1,18 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import googleIcon from '../assets/googleLogo.png'
 import useAuth from '../hooks/useAuth';
 import toast from '../utils/toast'
 
 const GoogleSignIn = () => {
-  const {pathname} = useLocation();
+  const {pathname, state} = useLocation();
   const { signInWithGoogle, setLoading, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
     .then(({user}) => {
       setUser(user);
+      navigate(state || '/');
       setLoading(false);
       toast('success', `${pathname === 'login' ? 'Logged in Successfully' : 'Signed in Successfully'}`)
     })

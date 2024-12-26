@@ -36,7 +36,7 @@ const Foods = () => {
 
 
   return (
-    <section>
+    <section className="my-12">
       <Heading
         heading="Available Foods"
         paragraph="Request for food that you needed"

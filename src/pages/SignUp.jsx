@@ -7,7 +7,7 @@ import { useState } from "react";
 import toast from "../utils/toast";
 
 const SignUp = () => {
-  const { signUp, updateUserInfo, setUser } = useAuth();
+  const { signUp, updateUserInfo, setUser, setLoading } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const {state} = useLocation();
@@ -48,7 +48,7 @@ const SignUp = () => {
         setUser(user);
         updateUserInfo(userData)
           .then(() => {
-            navigate(state ? state : '/');
+            navigate(state || '/');
             toast("success", "SignUp Successfull!");
           })
           .catch(({ code }) => {
@@ -57,6 +57,7 @@ const SignUp = () => {
       })
       .catch(({ code }) => {
         toast("error", code);
+        setLoading(false);
       });
   };
   return (

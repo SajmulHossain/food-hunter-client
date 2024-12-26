@@ -17,6 +17,7 @@ const Header = () => {
       })
       .catch(({ code }) => {
         toast("error", code);
+        setLoading(false);
       });
   };
   const links = (
@@ -68,7 +69,7 @@ const Header = () => {
           }
           to="/food-request"
         >
-          Food Request
+         My Food Request
         </NavLink>
       </li>
     </>
@@ -113,12 +114,19 @@ const Header = () => {
         </div>
         <div className="navbar-end join">
           {user ? (
-            <button
-              onClick={handleLogOut}
-              className="btn bg-green-400 hover:bg-transparent hover:text-black hover:scale-105"
-            >
-              Log Out
-            </button>
+            <div className="flex items-center gap-2">
+            <div>
+              <img src={user?.photoURL} className="w-10 h-10 rounded-full" alt={`${user?.displayName}'s photo`} />
+            </div>
+              <div>
+                <button
+                  onClick={handleLogOut}
+                  className="btn bg-green-400 hover:bg-transparent hover:text-black hover:scale-105"
+                >
+                  Log Out
+                </button>
+              </div>
+            </div>
           ) : (
             <>
               {" "}

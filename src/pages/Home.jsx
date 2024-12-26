@@ -1,5 +1,7 @@
+import ContactForm from "../components/ContactForm";
 import FeaturedFood from "../components/FeaturedFood";
 import HomeSlider from "../components/HomeSlider";
+import Testimonial from "../components/Testimonial";
 
 const Home = () => {
   return (
@@ -8,6 +10,8 @@ const Home = () => {
         <HomeSlider />
       </div>
         <FeaturedFood />
+        <Testimonial />
+        <ContactForm />
     </section>
   );
 };

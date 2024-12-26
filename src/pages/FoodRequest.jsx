@@ -19,7 +19,7 @@ const FoodRequest = () => {
   //   return <DataLoding />
   // }
   return (
-    <section>
+    <section className="my-12">
       <Heading
         heading={`Food Request (${
           isLoading
