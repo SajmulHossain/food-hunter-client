@@ -44,10 +44,10 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser?.email) {
         setUser(currentUser);
-        axios.post(
+        await axios.post(
           "https://ph-assignment-11-server-phi.vercel.app/jwt",
           { email: currentUser?.email },
           { withCredentials: true }
