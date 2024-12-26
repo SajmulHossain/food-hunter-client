@@ -63,7 +63,7 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: '/foods/:id', 
+        path: '/food/:id', 
         element: <PrivetRoute>
           <FoodDetails />
         </PrivetRoute>

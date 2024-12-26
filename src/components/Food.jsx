@@ -89,7 +89,7 @@ const Food = ({food}) => {
 
       <div data-aos="fade-up" className="mt-4">
         <Link
-          to={`/foods/${_id}`}
+          to={`/food/${_id}`}
           className="btn w-full bg-green-600 text-white rounded hover:bg-green-700"
         >
           View Details
