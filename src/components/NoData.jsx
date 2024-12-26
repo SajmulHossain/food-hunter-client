@@ -1,11 +1,16 @@
 import Lottie from 'lottie-react';
 import noDataLottie from '../assets/lotties/noData.json'
+import { motion } from "motion/react";
 
 const NoData = () => {
   return (
-    <section className='h-[calc(100vh - 100px)] flex justify-center items-center'>
+    <motion.section
+      animate={{ y: [-10, 10, -10] }}
+      transition={{ duration: 10, repeat: Infinity }}
+      className="h-[calc(100vh - 100px)] flex justify-center items-center"
+    >
       <Lottie animationData={noDataLottie} />
-    </section>
+    </motion.section>
   );
 };
 

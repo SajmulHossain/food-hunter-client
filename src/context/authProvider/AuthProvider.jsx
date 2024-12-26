@@ -35,7 +35,8 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setLoading(true);
-    axios.get("https://ph-assignment-11-server-phi.vercel.app/logout", { withCredentials: true });
+    
+    axios.get(`${import.meta.env.VITE_API_URL}/logout`, { withCredentials: true });
     return signOut(auth);
   };
 

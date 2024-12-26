@@ -23,7 +23,7 @@ const Food = ({food}) => {
         <img
           referrerPolicy="no-referrer"
           src={image}
-          className="w-full h-[300px] object-cover rounded-md"
+          className="w-full h-[300px] shadow-lg object-cover rounded-md"
           alt={`${foodName}'s image`}
         />
       </div>

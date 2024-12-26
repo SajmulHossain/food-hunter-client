@@ -4,10 +4,10 @@ import HomeSlider from "../components/HomeSlider";
 const Home = () => {
   return (
     <section>
-      <div className="my-8">
+      <div className="my-8 lg:my-12">
         <HomeSlider />
-        <FeaturedFood />
       </div>
+        <FeaturedFood />
     </section>
   );
 };

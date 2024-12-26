@@ -29,49 +29,49 @@ const HomeSlider = () => {
       <SwiperSlide>
         <img
           src={slider1}
-          className="object-cover w-full h-[400px] lg:h-[600px]"
+          className="object-cover w-full h-[400px] lg:h-[550px]"
           alt="slider1"
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           src={slider2}
-          className="object-cover w-full h-[400px] lg:h-[600px]"
+          className="object-cover w-full h-[400px] lg:h-[550px]"
           alt="slider2"
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           src={slider3}
-          className="object-cover w-full h-[400px] lg:h-[600px]"
+          className="object-cover w-full h-[400px] lg:h-[550px]"
           alt="slider3"
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           src={slider4}
-          className="object-cover w-full h-[400px] lg:h-[600px]"
+          className="object-cover w-full h-[400px] lg:h-[550px]"
           alt="slider3"
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           src={slider5}
-          className="object-cover w-full h-[400px] lg:h-[600px]"
+          className="object-cover w-full h-[400px] lg:h-[550px]"
           alt="slider3"
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           src={slider6}
-          className="object-cover w-full h-[400px] lg:h-[600px]"
+          className="object-cover w-full h-[400px] lg:h-[550px]"
           alt="slider3"
         />
       </SwiperSlide>
       <SwiperSlide>
         <img
           src={slider7}
-          className="object-cover w-full h-[400px] lg:h-[600px]"
+          className="object-cover w-full h-[400px] lg:h-[550px]"
           alt="slider3"
         />
       </SwiperSlide>

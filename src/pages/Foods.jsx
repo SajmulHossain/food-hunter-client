@@ -34,9 +34,6 @@ const Foods = () => {
     refetch();
   };
 
-  if (isLoading) {
-    return <DataLoding />;
-  }
 
   return (
     <section>
@@ -90,7 +87,11 @@ const Foods = () => {
         </div>
       </div>
 
-      {(!foods || foods.length === 0) && (
+      {
+        isLoading && <DataLoding height={`[300px]`} />
+      }
+
+      {(!foods || foods.length === 0) && !isLoading && (
         <div className="my-12">
           <NoData />
         </div>

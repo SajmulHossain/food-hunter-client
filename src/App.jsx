@@ -1,28 +1,26 @@
-import { Outlet } from "react-router-dom"
-import Header from "./mainComponents/Header"
-import { useEffect } from "react"
-import Aos from "aos"
+import { Outlet } from "react-router-dom";
+import Header from "./mainComponents/Header";
+import { useEffect } from "react";
+import Aos from "aos";
 import "aos/dist/aos.css";
 import useAuth from "./hooks/useAuth";
 import Loading from "./components/Loading";
-
-
+import Footer from "./mainComponents/Footer";
 
 function App() {
-  const { loading} = useAuth();
+  const { loading } = useAuth();
 
-
-  useEffect(()=> {
+  useEffect(() => {
     Aos.init({
       duration: 500,
       offset: 50,
       easing: "ease",
       once: true,
     });
-  },[])
+  }, []);
 
-  if(loading) {
-    return <Loading />
+  if (loading) {
+    return <Loading />;
   }
 
   return (
@@ -31,8 +29,9 @@ function App() {
       <main className="max-w-screen-xl mx-auto px-4">
         <Outlet />
       </main>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

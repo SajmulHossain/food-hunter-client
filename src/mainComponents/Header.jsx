@@ -74,7 +74,7 @@ const Header = () => {
     </>
   );
   return (
-    <header className="bg-green-300">
+    <header className="bg-green-300/50 backdrop-blur-3xl sticky top-0 z-[1000]">
       <div className="navbar bg-transparent p-0 max-w-screen-xl mx-auto px-4">
         <div className="navbar-start">
           <div className="dropdown">

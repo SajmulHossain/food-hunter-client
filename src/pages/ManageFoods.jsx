@@ -60,17 +60,25 @@ const ManageFoods = () => {
     });
   };
 
-  if (isLoading) {
-    return <DataLoding />;
-  }
+  
 
   return (
     <section className="my-12">
-      <Heading heading={`Your added Foods (${foods?.length || 0})`} />
+      <Heading
+        heading={`Your Added Foods (${
+          isLoading
+            ? "..."
+            : foods?.length < 9
+            ? `0${foods.length}`
+            : foods?.length || 0
+        })`}
+      />
+      {isLoading && <DataLoding height={'[300px]'} />}
 
-      {(!foods || foods.length === 0) && <NoData />}
+      {(!foods || foods?.length === 0) && !isLoading && <NoData />}
 
-      {foods.length > 0 && (
+
+      {foods?.length > 0 && (
         <div className="overflow-x-auto">
           <table className="table table-lg border">
             {/* head */}
@@ -94,7 +102,9 @@ const ManageFoods = () => {
                       className={`${
                         food?.status === "Available"
                           ? "bg-green-100 text-green-700"
-                          : food?.status === 'Requested' ? "text-blue-700 bg-blue-100" : "text-red-700 bg-red-100"
+                          : food?.status === "Requested"
+                          ? "text-blue-700 bg-blue-100"
+                          : "text-red-700 bg-red-100"
                       } px-3 py-1 rounded`}
                     >
                       {food.status}

@@ -15,21 +15,27 @@ const FoodRequest = () => {
     return data;
   }})
 
-  
-  if(isLoading) {
-    return <DataLoding />
-  }
-
+  // if(isLoading) {
+  //   return <DataLoding />
+  // }
   return (
     <section>
       <Heading
-        heading={`Food Request (${data?.length || 0})`}
+        heading={`Food Request (${
+          isLoading
+            ? "..."
+            : data?.length < 9
+            ? `0${data.length}`
+            : data?.length || 0
+        })`}
         paragraph="Your Requested Foods Here"
       />
 
-      {(!data || data.length === 0) && <NoData />}
+      {isLoading && <DataLoding height={`[300px]`} />}
 
-      {data.length > 0 && (
+      {(!data || data?.length === 0) && !isLoading && <NoData />}
+
+      {data?.length > 0 && (
         <div className="overflow-x-auto">
           <table className="table table-lg border">
             {/* head */}
