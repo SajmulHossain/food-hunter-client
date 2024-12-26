@@ -6,6 +6,7 @@ import DataLoding from "../components/DataLoding";
 import { useState } from "react";
 import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
 import NoData from "../components/NoData";
+import { Helmet } from "react-helmet-async";
 
 const Foods = () => {
   const [is2Coloum, setIs2Coloum] = useState(false);
@@ -26,7 +27,7 @@ const Foods = () => {
     },
   });
 
-  const handleSearch =  (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setSearch("");
     const text = e.target.search.value;
@@ -34,9 +35,11 @@ const Foods = () => {
     refetch();
   };
 
-
   return (
     <section className="my-12">
+      <Helmet>
+        <title>Available Foods || Food Hunter</title>
+      </Helmet>
       <Heading
         heading="Available Foods"
         paragraph="Request for food that you needed"
@@ -54,7 +57,10 @@ const Foods = () => {
             />
 
             <div className="absolute right-2 bottom-1/2 translate-y-1/2">
-              <button type="submit" className="bg-green-400 px-3 rounded-sm py-1">
+              <button
+                type="submit"
+                className="bg-green-400 px-3 rounded-sm py-1"
+              >
                 Search
               </button>
             </div>
@@ -63,11 +69,11 @@ const Foods = () => {
 
         <div className="w-2/5 sm:w-auto">
           <select
-          onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => setSort(e.target.value)}
             className="select select-bordered rounded-sm w-full"
             name="sort"
           >
-            <option value=''>Sort by Exp. Date</option>
+            <option value="">Sort by Exp. Date</option>
             <option value="asc">Ascending</option>
             <option value="dsc">Descending</option>
           </select>
@@ -87,9 +93,7 @@ const Foods = () => {
         </div>
       </div>
 
-      {
-        isLoading && <DataLoding height={`[300px]`} />
-      }
+      {isLoading && <DataLoding height={`[300px]`} />}
 
       {(!foods || foods.length === 0) && !isLoading && (
         <div className="my-12">

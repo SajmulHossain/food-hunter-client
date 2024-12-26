@@ -1,5 +1,4 @@
 import Heading from "../components/Heading";
-import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
@@ -11,6 +10,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import DataLoding from "../components/DataLoding";
 import NoData from "../components/NoData";
+import { Helmet } from "react-helmet-async";
 
 const ManageFoods = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,9 +34,7 @@ const ManageFoods = () => {
     onSuccess: () => {
       modal("Deleted!", "Your food has been deleted.", "success");
       queryClient.invalidateQueries({
-        queryKey: [
-          `addedFoodOf-${user?.email}`
-        ],
+        queryKey: [`addedFoodOf-${user?.email}`],
       });
     },
     onError: () => {
@@ -60,10 +58,11 @@ const ManageFoods = () => {
     });
   };
 
-  
-
   return (
     <section className="my-12">
+      <Helmet>
+        <title>Manage Food || Food Hunter</title>
+      </Helmet>
       <Heading
         heading={`Your Added Foods (${
           isLoading
@@ -73,10 +72,9 @@ const ManageFoods = () => {
             : foods?.length || 0
         })`}
       />
-      {isLoading && <DataLoding height={'[300px]'} />}
+      {isLoading && <DataLoding height={"[300px]"} />}
 
       {(!foods || foods?.length === 0) && !isLoading && <NoData />}
-
 
       {foods?.length > 0 && (
         <div className="overflow-x-auto">

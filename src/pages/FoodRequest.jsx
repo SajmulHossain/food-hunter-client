@@ -5,21 +5,27 @@ import DataLoding from "../components/DataLoding";
 import Heading from "../components/Heading";
 import NoData from "../components/NoData";
 import { compareAsc, format } from "date-fns";
-
+import { Helmet } from "react-helmet-async";
 
 const FoodRequest = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const {isLoading, data} = useQuery({queryKey: [`requestedFood-${user?.email}`], queryFn: async() => {
-    const { data } = await axiosSecure.get(`/requests?email=${user?.email}`);
-    return data;
-  }})
+  const { isLoading, data } = useQuery({
+    queryKey: [`requestedFood-${user?.email}`],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/requests?email=${user?.email}`);
+      return data;
+    },
+  });
 
   // if(isLoading) {
   //   return <DataLoding />
   // }
   return (
     <section className="my-12">
+      <Helmet>
+        <title>Food Request || Food Hunter</title>
+      </Helmet>
       <Heading
         heading={`Food Request (${
           isLoading

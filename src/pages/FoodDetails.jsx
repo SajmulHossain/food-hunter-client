@@ -6,6 +6,7 @@ import { compareAsc, format } from "date-fns";
 import RequestFoodModal from "../components/RequestFoodModal";
 import { useQuery } from "@tanstack/react-query";
 import DataLoding from "../components/DataLoding";
+import { Helmet } from "react-helmet-async";
 
 const FoodDetails = () => {
   const { id } = useParams();
@@ -13,7 +14,9 @@ const FoodDetails = () => {
   const { data: food, isLoading } = useQuery({
     queryKey: [`food-${id}`],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/food/${id}`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/food/${id}`
+      );
       return data;
     },
   });
@@ -35,9 +38,11 @@ const FoodDetails = () => {
     donatorPhoto,
   } = food;
 
-
   return (
     <section className="my-12">
+      <Helmet>
+        <title>{`${foodName}'s Details || Food Hunter`}</title>
+      </Helmet>
       <Heading heading="Food Details" paragraph="Check all data to request" />
 
       <div className="border p-4 rounded border-green-800 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4 hover:scale-105 transition-all duration-500">

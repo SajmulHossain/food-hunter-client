@@ -5,12 +5,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import toast from "../utils/toast";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const { signUp, updateUserInfo, setUser, setLoading } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -48,7 +49,7 @@ const SignUp = () => {
         setUser(user);
         updateUserInfo(userData)
           .then(() => {
-            navigate(state || '/');
+            navigate(state || "/");
             toast("success", "SignUp Successfull!");
           })
           .catch(({ code }) => {
@@ -62,6 +63,9 @@ const SignUp = () => {
   };
   return (
     <div className="min-h-screen my-4">
+      <Helmet>
+        <title>Sign Up || Food Hunter</title>
+      </Helmet>
       <div className="hero-content px-0 flex-col lg:flex-row-reverse">
         <div data-aos="fade-right" className="lg:w-2/5">
           <Lottie animationData={signUpLottie} />
@@ -134,7 +138,7 @@ const SignUp = () => {
             <p className="text-xs">
               Already Have an Account?{" "}
               <Link
-              state={state}
+                state={state}
                 to="/login"
                 className="underline hover:italic font-semibold"
               >

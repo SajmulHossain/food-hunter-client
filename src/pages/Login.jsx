@@ -5,11 +5,12 @@ import GoogleSignIn from "../components/GoogleSignIn";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "../utils/toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { login, setUser, setLoading } = useAuth();
   const navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const handleSignIn = (e) => {
     e.preventDefault();
 
@@ -30,6 +31,9 @@ const Login = () => {
   };
   return (
     <div className="min-h-screen my-4">
+      <Helmet>
+        <title>Login || Food Hunter</title>
+      </Helmet>
       <div className="hero-content px-0 flex-col lg:flex-row-reverse">
         <div data-aos="fade-right">
           <Lottie animationData={loginLottie} />
