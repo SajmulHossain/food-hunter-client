@@ -36,7 +36,7 @@ const FoodDetails = () => {
     donatorName,
     donatorEmail,
     donatorPhoto,
-  } = food;
+  } = food || {};
 
   return (
     <section className="my-12">

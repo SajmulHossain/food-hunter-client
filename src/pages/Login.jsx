@@ -20,7 +20,7 @@ const Login = () => {
 
     login(email, password)
       .then(({ user }) => {
-        navigate(state);
+        navigate(state || '/');
         toast("success", "Log in successful!");
         setUser(user);
       })

@@ -72,7 +72,7 @@ const ManageFoods = () => {
             : foods?.length || 0
         })`}
       />
-      {isLoading && <DataLoding height={"[300px]"} />}
+      {(isLoading || isPending) && <DataLoding height={"[300px]"} />}
 
       {(!foods || foods?.length === 0) && !isLoading && <NoData />}
 
@@ -139,11 +139,8 @@ const ManageFoods = () => {
                         <FaEdit size={22} color="green" />
                       </Link>
                       <button onClick={() => handleDeleteFood(food._id)}>
-                        {isPending ? (
-                          <span className="loading loading-spinner loading-xs"></span>
-                        ) : (
+                       
                           <MdDelete size={22} color="red" />
-                        )}
                       </button>
                     </div>
                   </td>

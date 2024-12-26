@@ -35,8 +35,6 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setLoading(true);
-    
-    axios.get(`${import.meta.env.VITE_API_URL}/logout`, { withCredentials: true });
     return signOut(auth);
   };
 
@@ -53,15 +51,15 @@ const AuthProvider = ({ children }) => {
           "https://ph-assignment-11-server-phi.vercel.app/jwt",
           { email: currentUser?.email },
           { withCredentials: true }
-
         );
         setLoading(false);
       } else {
+        axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+          withCredentials: true,
+        });
         setUser(currentUser);
         setLoading(false);
       }
-
-      
     });
 
     return () => {
