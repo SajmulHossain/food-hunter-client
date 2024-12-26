@@ -4,14 +4,31 @@ import modal from "../utils/modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { compareAsc } from "date-fns";
-import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import toast from "../utils/toast";
+import { useNavigate } from "react-router-dom";
 
 const AddFoods = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
   const [expiredDate, setExpiredDate] = useState(new Date());
+  const navigate = useNavigate();
 
-  const handleAddFood = (e) => {
+  const {isPending, mutateAsync} = useMutation({mutationFn: async data => {
+   await axiosSecure.post('/foods', data)
+  },
+  onSuccess: () => {
+    modal("Food Donate!", "Food added successfully", "success");
+    navigate('/manage-foods');
+  },
+  onError: () => {
+    modal("Food Donate!", "Something went wrong!", "error");
+  }
+})
+
+  const handleAddFood =  (e) => {
     e.preventDefault();
     setError("");
 
@@ -62,13 +79,14 @@ const AddFoods = () => {
       donatorPhoto,
     };
 
-    axios.post("https://ph-assignment-11-server-phi.vercel.app/foods", data).then(({ data }) => {
-      if (data.insertedId) {
-        modal("Food Donate!", "Food added successfully", "success");
-      } else {
-        modal("Food Donate!", "Something went wrong!", "error");
-      }
-    });
+    try{
+      mutateAsync(data);
+      form.reset();
+    } catch (err) {
+      toast('error', err.message)
+    }
+
+    
   };
   return (
     <section className="min-h-screen my-4">
@@ -218,7 +236,10 @@ const AddFoods = () => {
                 type="submit"
                 className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm"
               >
-                Add Food
+                Add Food{" "}
+                {isPending && (
+                  <span className="loading loading-spinner loading-xs"></span>
+                )}
               </button>
             </div>
           </form>

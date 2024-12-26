@@ -8,13 +8,41 @@ import Swal from "sweetalert2";
 import modal from "../utils/modal";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import DataLoding from "../components/DataLoding";
 import NoData from "../components/NoData";
 
 const ManageFoods = () => {
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
   const { user } = useAuth();
+
+  const { data: foods, isLoading } = useQuery({
+    queryKey: [`addedFoodOf-${user?.email}`],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/foods/${user?.email}`);
+      return data;
+    },
+  });
+
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      await axiosSecure.delete(
+        `https://ph-assignment-11-server-phi.vercel.app/food/${id}`
+      );
+    },
+    onSuccess: () => {
+      modal("Deleted!", "Your food has been deleted.", "success");
+      queryClient.invalidateQueries({
+        queryKey: [
+          `addedFoodOf-${user?.email}`
+        ],
+      });
+    },
+    onError: () => {
+      modal("Error!", "Something went wrong", "error");
+    },
+  });
 
   const handleDeleteFood = (id) => {
     Swal.fire({
@@ -25,26 +53,15 @@ const ManageFoods = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`).then(({ data }) => {
-          if (data.deletedCount) {
-            modal("Deleted!", "Your food has been deleted.", "success");
-          } else {
-            modal("Error!", "Something went wrong", "error");
-          }
-        });
+        await mutateAsync(id);
       }
     });
   };
 
-  const {data:foods, isLoading} = useQuery({queryKey: [`addedFoodOf-${user?.email}`], queryFn: async () => {
-    const { data } = await axiosSecure.get(`/foods/${user?.email}`);
-    return data;
-  }})
-
-  if(isLoading) {
-    return <DataLoding />
+  if (isLoading) {
+    return <DataLoding />;
   }
 
   return (
@@ -77,7 +94,7 @@ const ManageFoods = () => {
                       className={`${
                         food?.status === "Available"
                           ? "bg-green-100 text-green-700"
-                          : "text-red-700 bg-red-100"
+                          : food?.status === 'Requested' ? "text-blue-700 bg-blue-100" : "text-red-700 bg-red-100"
                       } px-3 py-1 rounded`}
                     >
                       {food.status}
@@ -114,7 +131,11 @@ const ManageFoods = () => {
                         <FaEdit size={22} color="green" />
                       </Link>
                       <button onClick={() => handleDeleteFood(food._id)}>
-                        <MdDelete size={22} color="red" />
+                        {isPending ? (
+                          <span className="loading loading-spinner loading-xs"></span>
+                        ) : (
+                          <MdDelete size={22} color="red" />
+                        )}
                       </button>
                     </div>
                   </td>

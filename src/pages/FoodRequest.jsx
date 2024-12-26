@@ -10,7 +10,7 @@ import { compareAsc, format } from "date-fns";
 const FoodRequest = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const {isLoading, data} = useQuery({queryKey: [`reqest-${user?.email}`], queryFn: async() => {
+  const {isLoading, data} = useQuery({queryKey: [`requestedFood-${user?.email}`], queryFn: async() => {
     const { data } = await axiosSecure.get(`/requests?email=${user?.email}`);
     return data;
   }})
