@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         setUser(currentUser);
         await axios.post(
-          "https://ph-assignment-11-server-phi.vercel.app/jwt",
+          "http://localhost:3000/jwt",
           { email: currentUser?.email },
           { withCredentials: true }
         );

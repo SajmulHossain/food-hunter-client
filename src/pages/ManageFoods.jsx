@@ -28,7 +28,7 @@ const ManageFoods = () => {
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
       await axiosSecure.delete(
-        `https://ph-assignment-11-server-phi.vercel.app/food/${id}`
+        `http://localhost:3000/food/${id}`
       );
     },
     onSuccess: () => {

@@ -69,7 +69,7 @@ const UpdateFood = () => {
 
     axios
       .put(
-        `https://ph-assignment-11-server-phi.vercel.app/food/update/${id}`,
+        `http://localhost:3000/food/update/${id}`,
         data
       )
       .then(({ data }) => {
@@ -85,7 +85,7 @@ const UpdateFood = () => {
 
   useEffect(() => {
     axios
-      .get(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`)
+      .get(`http://localhost:3000/food/${id}`)
       .then(({ data }) => {
         setFood(data);
       });
