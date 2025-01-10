@@ -64,9 +64,7 @@ const routes = createBrowserRouter([
       },
       {
         path: '/food/:id', 
-        element: <PrivetRoute>
-          <FoodDetails />
-        </PrivetRoute>
+        element: <FoodDetails />
       },
       {
         path: '/food/update/:id',

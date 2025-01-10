@@ -28,6 +28,10 @@
     @apply !bg-green-700 !text-white;
   }
 
+  .section {
+    @apply max-w-screen-xl mx-auto px-4 my-16 lg:my-20 py-8;
+  }
+
   .pending {
     @apply bg-red-400 text-white;
   }

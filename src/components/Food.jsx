@@ -5,7 +5,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const Food = ({food}) => {
+const Food = ({ food, length, is3Coloum, index }) => {
   const {
     _id,
     foodName,
@@ -18,12 +18,18 @@ const Food = ({food}) => {
     donatorPhoto,
   } = food || {};
   return (
-    <div className="border hover:scale-105 transition-all duration-500 border-green-800 bg-green-200 p-4 rounded flex flex-col justify-between">
+    <div
+      className={`border ${
+        index === length - 1 && length % 3 === 1
+          ? "col-span-3 justify-center w-full max-w-md mx-auto"
+          : ""
+      } hover:scale-105 transition-all duration-500 border-green-800 bg-green-200 p-4 rounded flex flex-col justify-between`}
+    >
       <div>
         <img
           referrerPolicy="no-referrer"
           src={image}
-          className="w-full h-[300px] shadow-lg object-cover rounded-md"
+          className={`w-full h-[300px] shadow-lg object-cover rounded-md lg:h-${is3Coloum ? '[300px]' : '[200px]'}`}
           alt={`${foodName}'s image`}
         />
       </div>
@@ -46,6 +52,7 @@ const Food = ({food}) => {
           <img
             className="h-12 w-12 rounded-full object-cover"
             src={donatorPhoto}
+            referrerPolicy="no-referrer"
             alt={`${donatorName}'s name photo`}
           />
         </div>

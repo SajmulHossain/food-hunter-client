@@ -59,7 +59,7 @@ const ManageFoods = () => {
   };
 
   return (
-    <section className="my-12">
+    <section className="my-12 section">
       <Helmet>
         <title>Manage Food || Food Hunter</title>
       </Helmet>

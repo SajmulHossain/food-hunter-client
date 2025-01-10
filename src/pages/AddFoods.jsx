@@ -89,7 +89,7 @@ const AddFoods = () => {
     }
   };
   return (
-    <section className="min-h-screen my-4">
+    <section className="min-h-screen my-4 section">
       <Helmet>
         <title>Add Food || Food Hunter</title>
       </Helmet>

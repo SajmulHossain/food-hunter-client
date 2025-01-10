@@ -98,7 +98,7 @@ const UpdateFood = () => {
   }, [food]);
 
   return (
-    <section className="min-h-screen my-4">
+    <section className="min-h-screen my-4 section">
       <Helmet>
         <title>Update Food || Food Hunter</title>
       </Helmet>

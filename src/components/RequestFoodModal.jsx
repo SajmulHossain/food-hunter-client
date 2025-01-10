@@ -12,33 +12,36 @@ const RequestFoodModal = ({ food }) => {
   const [requestDate, setRequestDate] = useState(new Date());
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleRequest = e => {
+  const [loading, setLoading] = useState();
+
+  const handleRequest = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.target;
     const userEmail = form.userEmail.value;
     const newNotes = form.newNotes.value;
-    
+
     const data = {
       userEmail,
       requestDate,
       foodId: food?._id,
-      newNotes
-    }
+      newNotes,
+    };
 
-    axiosSecure.post(`/food/${food?._id}`, data)
-    .then(res=> {
-      if(res?.data?.result?.modifiedCount) {
-        modal('Request Food!', 'Food Request Accepted.', 'success')
-        navigate('/food-request')
+    axiosSecure.post(`/food/${food?._id}`, data).then((res) => {
+      setLoading(false);
+      if (res?.data?.result?.modifiedCount) {
+        modal("Request Food!", "Food Request Accepted.", "success");
+        navigate("/food-request");
       } else {
-        modal('Food Request!', 'Something went wrong.', 'error')
-        document.getElementById('my_modal').close();
+        modal("Food Request!", "Something went wrong.", "error");
+        document.getElementById("my_modal").close();
       }
-    })
-  }
+    });
+  };
   return (
     <dialog id="my_modal" className="modal backdrop-blur-md">
       <div className="w-full px-4 mx-auto">
@@ -238,7 +241,10 @@ const RequestFoodModal = ({ food }) => {
 
             <div className="mt-6">
               <button className="btn w-full hover:bg-green-700 bg-green-600 rounded text-white">
-                Request
+                Request{" "}
+                {loading && (
+                  <span className="loading loading-spinner loading-xs"></span>
+                )}
               </button>
             </div>
           </form>

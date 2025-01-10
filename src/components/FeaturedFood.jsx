@@ -18,7 +18,7 @@ const FeaturedFood = () => {
   });
 
   return (
-    <section className="my-16 lg:my-20">
+    <section className="section">
       <Heading heading="Featured Food" />
 
       {isLoading && <DataLoding height={`[400px]`} />}

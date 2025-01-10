@@ -9,7 +9,7 @@ import NoData from "../components/NoData";
 import { Helmet } from "react-helmet-async";
 
 const Foods = () => {
-  const [is2Coloum, setIs2Coloum] = useState(false);
+  const [is3Coloum, setIs3Coloum] = useState(false);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
 
@@ -36,7 +36,7 @@ const Foods = () => {
   };
 
   return (
-    <section className="my-12">
+    <section className="my-12 section">
       <Helmet>
         <title>Available Foods || Food Hunter</title>
       </Helmet>
@@ -81,10 +81,10 @@ const Foods = () => {
         <div className="hidden lg:block">
           <button
             className="btn bg-green-100 hover:bg-green-200"
-            onClick={() => setIs2Coloum(!is2Coloum)}
+            onClick={() => setIs3Coloum(!is3Coloum)}
           >
             Change Layout
-            {is2Coloum ? (
+            {is3Coloum ? (
               <TfiLayoutGrid3Alt size={24} />
             ) : (
               <TfiLayoutGrid2Alt size={24} />
@@ -104,11 +104,11 @@ const Foods = () => {
       {foods?.length > 0 && (
         <div
           className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${
-            is2Coloum ? "2" : "3"
-          } gap-4`}
+            is3Coloum ? "3" : "4"}
+           gap-4`}
         >
-          {foods?.map((food) => (
-            <Food key={food._id} food={food} />
+          {foods?.map((food,index) => (
+            <Food key={food._id} length={foods.length} index={index} food={food} is3Coloum={is3Coloum} />
           ))}
         </div>
       )}

@@ -1,5 +1,5 @@
 import Heading from "../components/Heading";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import axios from "axios";
 import { compareAsc, format } from "date-fns";
@@ -7,9 +7,13 @@ import RequestFoodModal from "../components/RequestFoodModal";
 import { useQuery } from "@tanstack/react-query";
 import DataLoding from "../components/DataLoding";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../hooks/useAuth";
+import { BiLeftArrowAlt } from "react-icons/bi";
 
 const FoodDetails = () => {
   const { id } = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { data: food, isLoading } = useQuery({
     queryKey: [`food-${id}`],
@@ -46,12 +50,13 @@ const FoodDetails = () => {
       <Heading heading="Food Details" paragraph="Check all data to request" />
 
       <div className="border p-4 rounded border-green-800 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4 hover:scale-105 transition-all duration-500">
-        <div data-aos="fade-down">
+        <div data-aos="fade-down" className="relative">
           <img
             src={image}
             className="w-full rounded h-[400px] object-cover "
             alt={`${foodName}'s image`}
           />
+          <button onClick={() => navigate(-1)} className="p-1 absolute top-2 left-2 bg-green-400 rounded-full"><BiLeftArrowAlt size={24} /></button>
         </div>
 
         <div>
@@ -134,7 +139,10 @@ const FoodDetails = () => {
           <div className="mt-4">
             <button
               disabled={status !== "Available"}
-              onClick={() => document.getElementById("my_modal").showModal()}
+              onClick={() => {if(user) return document.getElementById("my_modal").showModal();
+
+                navigate('/login')
+              }}
               className={`btn w-full rounded btn-primary`}
             >
               Request Food

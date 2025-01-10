@@ -11,7 +11,7 @@ const ContactForm = () => {
     e.target.reset();
   };
   return (
-    <section className="my-12">
+    <section className="section">
       <Heading
         heading={`Contact Us`}
         paragraph={`If you want to donate money or facing any problem`}

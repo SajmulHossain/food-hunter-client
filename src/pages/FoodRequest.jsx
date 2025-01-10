@@ -22,7 +22,7 @@ const FoodRequest = () => {
   //   return <DataLoding />
   // }
   return (
-    <section className="my-12">
+    <section className="my-12 section">
       <Helmet>
         <title>Food Request || Food Hunter</title>
       </Helmet>
@@ -59,7 +59,7 @@ const FoodRequest = () => {
               {data?.map((food, index) => (
                 <tr
                   className={`${
-                    index % 2 === 0 ? "bg-gray-300" : "bg-gray-400"
+                    index % 2 === 0 ? "bg-gray-300" : "bg-gray-400 text-white"
                   } text-center`}
                   key={food._id}
                 >
