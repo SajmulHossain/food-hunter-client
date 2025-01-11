@@ -22,7 +22,7 @@ const FoodRequest = () => {
   //   return <DataLoding />
   // }
   return (
-    <section className="my-12 section">
+    <section className="section page">
       <Helmet>
         <title>Food Request || Food Hunter</title>
       </Helmet>

@@ -11,7 +11,7 @@ const FeaturedFood = () => {
     queryKey: ["featuredFood"],
     queryFn: async () => {
       const { data } = await axios.get(
-        "http://localhost:3000/featuredFood?size=6"
+        "https://ph-assignment-11-server-phi.vercel.app/featuredFood?size=6"
       );
       return data;
     },

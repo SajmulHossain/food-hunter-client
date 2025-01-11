@@ -14,9 +14,11 @@ const UpdateFood = () => {
   const [food, setFood] = useState({});
   const [expiredDate, setExpiredDate] = useState(new Date());
   const navigate = useNavigate();
+  const [loading, isLoading] = useState(false);
 
   const handleUpdateFood = (e) => {
     e.preventDefault();
+    isLoading(true);
 
     setError("");
 
@@ -69,7 +71,7 @@ const UpdateFood = () => {
 
     axios
       .put(
-        `http://localhost:3000/food/update/${id}`,
+        `https://ph-assignment-11-server-phi.vercel.app/food/update/${id}`,
         data
       )
       .then(({ data }) => {
@@ -77,6 +79,7 @@ const UpdateFood = () => {
           modal("Food Update!", "Food Updated Succesfully", "success");
           navigate("/manage-foods");
           form.reset();
+          isLoading(false);
         } else {
           modal("Food Update!", "Something went wrong", "error");
         }
@@ -85,7 +88,7 @@ const UpdateFood = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/food/${id}`)
+      .get(`https://ph-assignment-11-server-phi.vercel.app/food/${id}`)
       .then(({ data }) => {
         setFood(data);
       });
@@ -98,7 +101,7 @@ const UpdateFood = () => {
   }, [food]);
 
   return (
-    <section className="min-h-screen my-4 section">
+    <section className="section page">
       <Helmet>
         <title>Update Food || Food Hunter</title>
       </Helmet>
@@ -254,7 +257,10 @@ const UpdateFood = () => {
                 type="submit"
                 className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm"
               >
-                Update Food
+                Update Food{" "}
+                {loading && (
+                  <span className="loading loading-spinner loading-xs"></span>
+                )}
               </button>
             </div>
           </form>

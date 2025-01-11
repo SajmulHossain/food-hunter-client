@@ -28,7 +28,7 @@ const ManageFoods = () => {
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
       await axiosSecure.delete(
-        `http://localhost:3000/food/${id}`
+        `https://ph-assignment-11-server-phi.vercel.app/food/${id}`
       );
     },
     onSuccess: () => {
@@ -59,7 +59,7 @@ const ManageFoods = () => {
   };
 
   return (
-    <section className="my-12 section">
+    <section className="section page">
       <Helmet>
         <title>Manage Food || Food Hunter</title>
       </Helmet>

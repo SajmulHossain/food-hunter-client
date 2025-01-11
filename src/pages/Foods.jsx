@@ -36,7 +36,7 @@ const Foods = () => {
   };
 
   return (
-    <section className="my-12 section">
+    <section className="section page">
       <Helmet>
         <title>Available Foods || Food Hunter</title>
       </Helmet>
@@ -45,7 +45,7 @@ const Foods = () => {
         paragraph="Request for food that you needed"
       />
 
-      <div className="flex items-center gap-2 my-8 justify-center">
+      <div className="flex items-center gap-2 my-8 justify-center ">
         <div className="relative w-full lg:w-2/5">
           <form onSubmit={handleSearch}>
             <input
@@ -103,8 +103,7 @@ const Foods = () => {
 
       {foods?.length > 0 && (
         <div
-          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${
-            is3Coloum ? "3" : "4"}
+          className={`grid grid-cols-1 sm:grid-cols-2 ${is3Coloum ? 'lg:grid-cols-3': 'lg:grid-cols-4'}
            gap-4`}
         >
           {foods?.map((food,index) => (

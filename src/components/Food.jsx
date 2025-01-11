@@ -29,7 +29,7 @@ const Food = ({ food, length, is3Coloum, index }) => {
         <img
           referrerPolicy="no-referrer"
           src={image}
-          className={`w-full h-[300px] shadow-lg object-cover rounded-md lg:h-${is3Coloum ? '[300px]' : '[200px]'}`}
+          className={`w-full h-[300px] shadow-lg object-cover rounded-md ${is3Coloum ? 'lg:h-[300px]' : 'lg:h-[200px]'}`}
           alt={`${foodName}'s image`}
         />
       </div>

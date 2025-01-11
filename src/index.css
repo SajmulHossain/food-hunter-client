@@ -28,8 +28,13 @@
     @apply !bg-green-700 !text-white;
   }
 
+  
   .section {
     @apply max-w-screen-xl mx-auto px-4 my-16 lg:my-20 py-8;
+  }
+  
+  .page {
+    @apply py-8 my-0;
   }
 
   .pending {

@@ -62,7 +62,7 @@ const SignUp = () => {
       });
   };
   return (
-    <div className="min-h-screen my-4">
+    <div className="section page">
       <Helmet>
         <title>Sign Up || Food Hunter</title>
       </Helmet>
