@@ -7,7 +7,7 @@ const NoData = () => {
     <motion.section
       animate={{ y: [-10, 10, -10] }}
       transition={{ duration: 10, repeat: Infinity }}
-      className="h-[calc(100vh - 100px)] flex justify-center items-center"
+      className="min-h-[calc(100vh-100px] flex justify-center items-center"
     >
       <Lottie animationData={noDataLottie} />
     </motion.section>
