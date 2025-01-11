@@ -4,7 +4,7 @@ import Heading from "./Heading";
 const Testimonial = () => {
   return (
     <section className="bg-green-100">
-      <div className="section">
+      <div className="section py-8">
         <Heading heading={"Testimonial"} />
         <div>
           <div className="flex flex-col items-center mx-auto space-y-6">

@@ -14,7 +14,7 @@ const Newsletter = () => {
   }
   return (
     <section className='px-4'>
-      <div className="section border rounded border-green-400">
+      <div className="section py-8 border rounded border-green-400">
         <div className="max-w-screen-md mx-auto">
           <Heading heading="Newsletter" paragraph="Subscribe our newsletter" />
           <div className="space-y-3 text-center">
