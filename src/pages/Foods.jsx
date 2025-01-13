@@ -106,8 +106,8 @@ const Foods = () => {
           className={`grid grid-cols-1 sm:grid-cols-2 ${is3Coloum ? 'lg:grid-cols-3': 'lg:grid-cols-4'}
            gap-4`}
         >
-          {foods?.map((food,index) => (
-            <Food key={food._id} length={foods.length} index={index} food={food} is3Coloum={is3Coloum} />
+          {foods?.map((food) => (
+            <Food key={food._id} food={food} is3Coloum={is3Coloum} />
           ))}
         </div>
       )}

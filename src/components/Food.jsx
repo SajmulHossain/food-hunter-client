@@ -5,7 +5,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const Food = ({ food, length, is3Coloum, index }) => {
+const Food = ({ food, is3Coloum }) => {
   const {
     _id,
     foodName,
@@ -19,11 +19,7 @@ const Food = ({ food, length, is3Coloum, index }) => {
   } = food || {};
   return (
     <div
-      className={`border ${
-        index === length - 1 && length % 3 === 1
-          ? "col-span-3 justify-center w-full max-w-md mx-auto"
-          : ""
-      } hover:scale-105 transition-all duration-500 border-green-800 bg-green-200 p-4 rounded flex flex-col justify-between`}
+      className={`border hover:scale-105 transition-all duration-500 border-green-800 bg-green-200 p-4 rounded flex flex-col justify-between`}
     >
       <div>
         <img
