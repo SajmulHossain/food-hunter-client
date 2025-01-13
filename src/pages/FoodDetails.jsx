@@ -43,7 +43,7 @@ const FoodDetails = () => {
   } = food || {};
 
   return (
-    <section className="my-8">
+    <section className="section page">
       <Helmet>
         <title>{`${foodName}'s Details || Food Hunter`}</title>
       </Helmet>
