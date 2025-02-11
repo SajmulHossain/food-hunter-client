@@ -13,7 +13,7 @@ const ErrorPage = () => {
       </Helmet>
       <motion.div
         animate={{ x: [0,20,0,20,0] }}
-        transition={{duration: 0.2, repeat: 5}}
+        transition={{duration: 0.2, repeat: 3}}
         className="p-4 rounded border border-green-500"
       >
         <div>
