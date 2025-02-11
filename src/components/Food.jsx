@@ -20,7 +20,7 @@ const Food = ({ food, is3Coloum }) => {
   } = food || {};
   return (
     <div
-      className={`border hover:scale-105 transition-all duration-500 border-green-800 bg-green-200 p-4 rounded flex flex-col justify-between`}
+      className={`border hover:scale-105 dark:bg-green-950 transition-all duration-500 border-green-800 bg-green-200 p-4 rounded flex flex-col justify-between`}
     >
       <div>
         <img
@@ -58,7 +58,7 @@ const Food = ({ food, is3Coloum }) => {
           <p className="text-sm font-light">{donatorEmail}</p>
         </div>
 
-        <p className="absolute right-4 bottom-full translate-y-1/2 bg-green-200 px-3 font-semibold">
+        <p className="absolute right-4 bottom-full translate-y-1/2 dark:bg-green-950 bg-green-200 px-3 font-semibold">
           Donor
         </p>
       </div>

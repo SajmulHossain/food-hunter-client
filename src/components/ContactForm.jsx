@@ -27,7 +27,7 @@ const ContactForm = () => {
         </div>
         <div
           data-aos="fade-top"
-          className="card w-full max-w-md shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
+          className="card w-full max-w-md shrink-0 shadow-2xl border border-green-600 bg-green-100 dark:bg-green-950 rounded"
         >
           <form
             onSubmit={handleContactForm}
