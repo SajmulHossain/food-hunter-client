@@ -45,7 +45,7 @@ const FoodRequest = () => {
         <div className="overflow-x-auto">
           <table className="table table-lg border">
             {/* head */}
-            <thead className="bg-violet-300">
+            <thead className="bg-violet-300 dark:bg-violet-950 dark:text-gray-300">
               <tr className="text-center">
                 <th></th>
                 <th>Food Name</th>
