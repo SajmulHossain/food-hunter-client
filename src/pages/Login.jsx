@@ -40,7 +40,7 @@ const Login = () => {
         </div>
         <div
           data-aos="flip-left"
-          className="card w-full max-w-md shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
+          className="card w-full max-w-md shrink-0 shadow-2xl border dark:bg-transparent border-green-600 bg-green-100 rounded"
         >
           <form onSubmit={handleSignIn} className="card-body px-4 lg:px-6">
             <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
@@ -78,7 +78,7 @@ const Login = () => {
             <div className="form-control mt-6">
               <button
                 type="submit"
-                className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm"
+                className="btn bg-green-600 hover:bg-green-700 dark:bg-green-800 text-white/70 rounded-sm"
               >
                 Login
               </button>

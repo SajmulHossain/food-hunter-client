@@ -72,11 +72,11 @@ const SignUp = () => {
         </div>
         <div
           data-aos="flip-right"
-          className="card w-full max-w-md shrink-0 shadow-2xl border border-green-600 bg-green-100 rounded"
+          className="card w-full max-w-md shrink-0 shadow-2xl border dark:bg-transparent border-green-600 bg-green-100 rounded"
         >
           <form onSubmit={handleSignUp} className="card-body px-4 lg:px-6">
             <h3 className="text-3xl text-center font-semibold mb-4 border-b py-2 border-green-950">
-              SignUp now!
+              Sign Up now!
             </h3>
             {error && <p className="text-red-500 text-center">{error}</p>}
             <div className="form-control">
@@ -130,9 +130,9 @@ const SignUp = () => {
             <div className="form-control mt-6">
               <button
                 type="submit"
-                className="btn bg-green-600 hover:bg-green-700 text-white rounded-sm"
+                className="btn bg-green-600 dark:bg-green-800 text-white/50 hover:bg-green-700 text-white rounded-sm"
               >
-                Login
+                Sign Up
               </button>
             </div>
             <p className="text-xs">

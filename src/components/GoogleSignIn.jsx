@@ -24,7 +24,7 @@ const GoogleSignIn = () => {
 
   return (
     <div>
-      <button type='button' onClick={handleSignInWithGoogle} className="flex w-full hover:bg-green-300 gap-2 items-center btn bg-green-200">
+      <button type='button' onClick={handleSignInWithGoogle} className="flex w-full hover:bg-green-300 gap-2 items-center btn bg-green-200 dark:bg-green-800">
         <img className="h-6" src={googleIcon} alt="google icon" />
         <span>Continue With Google</span>
       </button>

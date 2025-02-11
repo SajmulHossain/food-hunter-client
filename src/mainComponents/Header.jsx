@@ -144,7 +144,7 @@ const Header = () => {
                 state={state}
                 to="/login"
                 className={({ isActive }) =>
-                  `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${
+                  `btn bg-green-400 dark:bg-green-800 dark:text-white/90 join-item hover:bg-transparent hover:text-black hover:scale-105 ${
                     isActive ? "active1" : ""
                   }`
                 }
@@ -155,7 +155,7 @@ const Header = () => {
                 state={state}
                 to="/sign-up"
                 className={({ isActive }) =>
-                  `btn bg-green-400 join-item hover:bg-transparent hover:text-black hover:scale-105 ${
+                  `btn bg-green-400 dark:bg-green-800 dark:text-white/90 join-item hover:bg-transparent hover:text-black hover:scale-105 ${
                     isActive ? "active1" : ""
                   }`
                 }
