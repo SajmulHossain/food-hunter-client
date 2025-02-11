@@ -16,6 +16,7 @@ const Food = ({ food, is3Coloum }) => {
     donatorName,
     donatorEmail,
     donatorPhoto,
+    notes,
   } = food || {};
   return (
     <div
@@ -89,13 +90,16 @@ const Food = ({ food, is3Coloum }) => {
           </p>
         </div>
       </div>
+        <div className="mt-2">
+          <p className="text-nowrap text-ellipsis overflow-hidden">{notes}</p>
+        </div>
 
       <div data-aos="fade-up" className="mt-4">
         <Link
           to={`/food/${_id}`}
           className="btn w-full bg-green-600 text-white rounded hover:bg-green-700"
         >
-          View Details
+          See More
         </Link>
       </div>
     </div>

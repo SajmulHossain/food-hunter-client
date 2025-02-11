@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "../utils/toast";
 import logo from "../assets/logo.png";
+import DarkMode from "../components/DarkMode";
 
 const Header = () => {
   const { user, logout, setLoading } = useAuth();
@@ -42,18 +43,18 @@ const Header = () => {
           Avilable Foods
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active1" : ""
+          }
+          to="/add-foods"
+        >
+          Add Foods
+        </NavLink>
+      </li>
       {user && (
         <>
-          <li>
-            <NavLink
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active1" : ""
-              }
-              to="/add-foods"
-            >
-              Add Foods
-            </NavLink>
-          </li>
           <li>
             <NavLink
               className={({ isActive, isPending }) =>
@@ -82,7 +83,7 @@ const Header = () => {
     <header className="bg-green-300/50 backdrop-blur-3xl sticky top-0 z-[1000]">
       <div className="navbar bg-transparent p-0 max-w-screen-xl mx-auto px-4">
         <div className="navbar-start">
-          <div className="dropdown"> 
+          <div className="dropdown">
             <div tabIndex={0} role="button" className="lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,12 +117,18 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
-        <div className="navbar-end join">
+        <div className="navbar-end gap-2">
+          <DarkMode />
           {user ? (
             <div className="flex items-center gap-2">
-            <div>
-              <img referrerPolicy="no-referrer" src={user?.photoURL} className="w-10 h-10 rounded-full" alt={`${user?.displayName}'s photo`} />
-            </div>
+              <div>
+                <img
+                  referrerPolicy="no-referrer"
+                  src={user?.photoURL}
+                  className="w-10 h-10 rounded-full"
+                  alt={`${user?.displayName}'s photo`}
+                />
+              </div>
               <div>
                 <button
                   onClick={handleLogOut}
@@ -133,7 +140,6 @@ const Header = () => {
             </div>
           ) : (
             <>
-              {" "}
               <NavLink
                 state={state}
                 to="/login"
