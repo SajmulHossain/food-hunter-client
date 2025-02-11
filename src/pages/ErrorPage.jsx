@@ -2,15 +2,20 @@ import { useNavigate } from "react-router-dom";
 import errorImg from "../assets/error.png";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import { motion } from "motion/react";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
   return (
-    <section className="min-h-screen flex justify-center items-center max-w-screen-xl mx-auto px-4">
+    <section className="min-h-screen overflow-hidden flex justify-center items-center max-w-screen-xl mx-auto px-4">
       <Helmet>
         <title>Error || Food Hunter</title>
       </Helmet>
-      <div className="p-4 rounded border border-green-500">
+      <motion.div
+        animate={{ y: [0,20,0,20,0] }}
+        transition={{duration: 20, repeat:Infinity}}
+        className="p-4 rounded border border-green-500"
+      >
         <div>
           <img src={errorImg} className="rounded" alt="error img" />
         </div>
@@ -32,7 +37,7 @@ const ErrorPage = () => {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
