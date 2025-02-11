@@ -12,8 +12,8 @@ const ErrorPage = () => {
         <title>Error || Food Hunter</title>
       </Helmet>
       <motion.div
-        animate={{ y: [0,20,0,20,0] }}
-        transition={{duration: 20, repeat:Infinity}}
+        animate={{ x: [0,20,0,20,0] }}
+        transition={{duration: 0.2, repeat: 5}}
         className="p-4 rounded border border-green-500"
       >
         <div>
