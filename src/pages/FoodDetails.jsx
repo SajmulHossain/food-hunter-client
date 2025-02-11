@@ -49,14 +49,19 @@ const FoodDetails = () => {
       </Helmet>
       <Heading heading="Food Details" paragraph="Check all data to request" />
 
-      <div className="border p-4 rounded border-green-800 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4 hover:scale-105 transition-all duration-500">
+      <div className="border p-4 rounded border-green-800 dark:bg-green-950 bg-green-100 overflow-hidden max-w-screen-sm mx-auto flex flex-col gap-4 hover:scale-105 transition-all duration-500">
         <div data-aos="fade-down" className="relative">
           <img
             src={image}
             className="w-full rounded h-[400px] object-cover "
             alt={`${foodName}'s image`}
           />
-          <button onClick={() => navigate(-1)} className="p-1 absolute top-2 left-2 bg-green-400 rounded-full"><BiLeftArrowAlt size={24} /></button>
+          <button
+            onClick={() => navigate(-1)}
+            className="p-1 absolute top-2 left-2 bg-green-400 dark:bg-green-800 dark:text-white rounded-full"
+          >
+            <BiLeftArrowAlt size={24} />
+          </button>
         </div>
 
         <div>
@@ -86,7 +91,7 @@ const FoodDetails = () => {
               <p className="text-sm font-light">{donatorEmail}</p>
             </div>
 
-            <p className="absolute right-4 bottom-full translate-y-1/2 bg-green-100 px-3 font-semibold">
+            <p className="absolute right-4 bottom-full translate-y-1/2 dark:bg-green-950 bg-green-100 px-3 font-semibold">
               Donor
             </p>
           </div>
@@ -101,8 +106,8 @@ const FoodDetails = () => {
               <span
                 className={`${
                   status === "Available"
-                    ? "text-green-800 bg-green-300"
-                    : "text-red-800 bg-red-200"
+                    ? "text-green-800 bg-green-300 dark:bg-green-800 dark:text-green-100"
+                    : "text-red-800 dark:bg-red-800 dark:text-red-100 bg-red-200"
                 } px-4 py-1 rounded`}
               >
                 {status}
@@ -113,8 +118,8 @@ const FoodDetails = () => {
               <span
                 className={`${
                   quantity >= 5
-                    ? "text-green-800 bg-green-300"
-                    : "text-red-800 bg-red-200"
+                    ? "text-green-800 bg-green-300 dark:bg-green-800 dark:text-green-100"
+                    : "text-red-800 dark:bg-red-800 dark:text-red-100 bg-red-200"
                 } px-4 py-1 rounded`}
               >
                 {quantity}
@@ -125,8 +130,8 @@ const FoodDetails = () => {
               <span
                 className={`${
                   compareAsc(new Date(), new Date(expiredDate)) === -1
-                    ? "bg-green-300 text-green-800"
-                    : "text-red-800 bg-red-200"
+                    ? "text-green-800 bg-green-300 dark:bg-green-800 dark:text-green-100"
+                    : "text-red-800 dark:bg-red-800 dark:text-red-100 bg-red-200"
                 } px-4 py-1 rounded`}
               >
                 {format(new Date(expiredDate || new Date()), "PP")}
@@ -134,14 +139,16 @@ const FoodDetails = () => {
             </p>
           </div>
 
-          <p className="mt-6 text-gray-600">{notes}</p>
+          <p className="mt-6 text-gray-600 dark:text-gray-300">{notes}</p>
 
           <div className="mt-4">
             <button
               disabled={status !== "Available"}
-              onClick={() => {if(user) return document.getElementById("my_modal").showModal();
+              onClick={() => {
+                if (user)
+                  return document.getElementById("my_modal").showModal();
 
-                navigate('/login')
+                navigate("/login");
               }}
               className={`btn w-full rounded btn-primary`}
             >

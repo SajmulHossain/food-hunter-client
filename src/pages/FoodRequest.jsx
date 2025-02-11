@@ -59,7 +59,7 @@ const FoodRequest = () => {
               {data?.map((food, index) => (
                 <tr
                   className={`${
-                    index % 2 === 0 ? "bg-gray-300" : "bg-gray-400 text-white"
+                    index % 2 === 0 ? "bg-gray-300 dark:bg-gray-700" : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-400"
                   } text-center`}
                   key={food._id}
                 >
@@ -72,8 +72,8 @@ const FoodRequest = () => {
                       className={`${
                         compareAsc(new Date(), new Date(food.expiredDate)) ===
                         -1
-                          ? "bg-green-100 text-green-700"
-                          : "text-red-700 bg-red-100"
+                          ? "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-100"
+                          : "text-red-700 bg-red-100 dark:bg-red-800 dark:text-red-100"
                       } px-4 py-1 rounded inline-block`}
                     >
                       {food?.expiredDate

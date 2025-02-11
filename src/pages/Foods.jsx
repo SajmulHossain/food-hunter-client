@@ -59,7 +59,7 @@ const Foods = () => {
             <div className="absolute right-2 bottom-1/2 translate-y-1/2">
               <button
                 type="submit"
-                className="bg-green-400 px-3 rounded-sm py-1"
+                className="bg-green-400 dark:bg-green-800 dark:text-gray-300 px-3 rounded-sm py-1"
               >
                 Search
               </button>
@@ -80,7 +80,7 @@ const Foods = () => {
         </div>
         <div className="hidden lg:block">
           <button
-            className="btn bg-green-100 hover:bg-green-200"
+            className="btn bg-green-100 dark:bg-green-900 dark:hover:bg-green-950 dark:text-gray-300 hover:bg-green-200"
             onClick={() => setIs3Coloum(!is3Coloum)}
           >
             Change Layout

@@ -80,7 +80,7 @@ const ManageFoods = () => {
         <div className="overflow-x-auto">
           <table className="table table-lg border">
             {/* head */}
-            <thead className="bg-violet-300">
+            <thead className="bg-violet-300 dark:bg-violet-950 dark:text-gray-400">
               <tr className="text-center">
                 <th></th>
                 <th>Food Name</th>
@@ -99,10 +99,10 @@ const ManageFoods = () => {
                     <span
                       className={`${
                         food?.status === "Available"
-                          ? "bg-green-100 text-green-700"
+                          ? "bg-green-100 dark:text-green-100 dark:bg-green-800 text-green-700"
                           : food?.status === "Requested"
-                          ? "text-blue-700 bg-blue-100"
-                          : "text-red-700 bg-red-100"
+                          ? "text-blue-700 dark:text-blue-100 dark:bg-blue-900 bg-blue-100"
+                          : "text-red-700 dark:text-red-100 dark:bg-red-700 bg-red-100"
                       } px-3 py-1 rounded`}
                     >
                       {food.status}
@@ -112,8 +112,8 @@ const ManageFoods = () => {
                     <span
                       className={`${
                         food?.quantity >= 5
-                          ? "bg-green-100 text-green-700"
-                          : "text-red-700 bg-red-100"
+                          ? "bg-green-100 dark:text-green-100 dark:bg-green-800 text-green-700"
+                          : "text-red-700 dark:text-red-100 dark:bg-red-800 bg-red-100"
                       } px-3 py-1 rounded`}
                     >
                       {food.quantity < 10 ? "0" + food.quantity : food.quantity}
@@ -124,8 +124,8 @@ const ManageFoods = () => {
                       className={`${
                         compareAsc(new Date(), new Date(food.expiredDate)) ===
                         -1
-                          ? "bg-green-100 text-green-700"
-                          : "text-red-700 bg-red-100"
+                          ? "bg-green-100 dark:text-green-100 dark:bg-green-800 text-green-700"
+                          : "text-red-700 dark:text-red-100 dark:bg-red-800 bg-red-100"
                       } px-4 py-1 rounded inline-block`}
                     >
                       {food?.expiredDate
@@ -136,11 +136,16 @@ const ManageFoods = () => {
                   <td>
                     <div className="flex items-center gap-2 justify-center">
                       <Link to={`/food/update/${food._id}`}>
-                        <FaEdit size={22} color="green" />
+                        <FaEdit
+                          size={22}
+                          className="text-green-700 dark:text-green-400"
+                        />
                       </Link>
                       <button onClick={() => handleDeleteFood(food._id)}>
-                       
-                          <MdDelete size={22} color="red" />
+                        <MdDelete
+                          size={22}
+                          className="text-red-700 dark:text-red-500"
+                        />
                       </button>
                     </div>
                   </td>
